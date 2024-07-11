@@ -1,0 +1,677 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>基礎天候理論、天候類型、如何因應惡劣天候(12-1)</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(0, 0, 0, 0.06); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="15119bd5-811a-4ab2-9366-1a7599339347" class="page sans"><header><h1 class="page-title">基礎天候理論、天候類型、如何因應惡劣天候(12-1)</h1><p class="page-description"></p></header><div class="page-body"><nav id="9015e56b-3963-4294-8879-da286ee0b362" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#39a597e3-ed19-4be6-b6a4-1e40a2e00a4d">Atmosphere</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#84b36e3d-343f-4f41-b777-adafe6455981">Atmospheric Circulation</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#2d7e8a64-194a-47f0-8301-911aae8e07e3">Atmospheric Pressure</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#cf5b4216-df93-42d6-967d-91ce09cef7b7">Coriolis Force (科氏力)</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#2f5e2e8c-1b52-461a-80fd-fd9c258a6e59">Measurement of Atmospheric Pressure</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#e0ed657d-7613-43c0-983a-662b49b6b63f">Altitude and Flight</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#15052ca2-bdbb-4bd3-9d81-40514699b0d9">Wind and Current</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#aa7f689f-72b3-47d1-9417-fe6869dca418">Convective Current (對流)</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#2aef213f-1534-4de0-9e7f-c537e373c857">Effect of Obstruction on Wind</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#5c7535e9-9f0f-417d-b9e9-2a6b17bb4078">Low-level Wind Shear</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#2efb1db8-8528-4ba4-bf12-3ae4c2f15df7">Wind and Pressure Representation on Weather Maps</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#ca12edf9-eb1a-4f5e-b900-8e27442ccaec">Wind Representation</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#8c254f3c-6088-414b-9bfa-c057a57f2741">Pressure Representation</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#614f6ead-84f6-4893-8291-cc7614d32b57">Cloud Types</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#13607cff-bc85-48f7-9834-9d3d4411df20">Ceiling</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#99c2b487-8b09-441c-abbf-33e8060ea052">Precipitation (降水)</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#c7a7c6ba-9e29-4141-b264-155ac31e4a0a">Air Masses (氣團)</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#b19bbf68-8229-4f0e-ac51-98e1b3582963">Fronts (鋒面)</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#1a82352c-ece8-44a8-ab2b-87bbd51196aa">Thunderstorm</a></div></nav><h2 id="39a597e3-ed19-4be6-b6a4-1e40a2e00a4d" class="">Atmosphere</h2><ul id="63f6524c-f1aa-4c12-a3dc-f61eb142db21" class="bulleted-list"><li style="list-style-type:disc">Composition of Atmosphere<ul id="a8daad70-3996-4451-95a1-e97ec31beccb" class="bulleted-list"><li style="list-style-type:circle">78% Nitrogen</li></ul><ul id="f000f85c-121d-4668-8f44-e0b946b2d6f1" class="bulleted-list"><li style="list-style-type:circle">21% Oxygen</li></ul><ul id="4947bac9-28bd-4fb6-8ca3-b21291c2ed7f" class="bulleted-list"><li style="list-style-type:circle">1% others</li></ul></li></ul><figure id="247043e2-8f2e-4043-9cfe-6d2b12f0cb18" class="image"><a href="%E5%9F%BA%E7%A4%8E%E5%A4%A9%E5%80%99%E7%90%86%E8%AB%96%E3%80%81%E5%A4%A9%E5%80%99%E9%A1%9E%E5%9E%8B%E3%80%81%E5%A6%82%E4%BD%95%E5%9B%A0%E6%87%89%E6%83%A1%E5%8A%A3%E5%A4%A9%E5%80%99(12-1)%2015119bd5811a4ab293661a7599339347/Untitled.png"><img style="width:576px" src="%E5%9F%BA%E7%A4%8E%E5%A4%A9%E5%80%99%E7%90%86%E8%AB%96%E3%80%81%E5%A4%A9%E5%80%99%E9%A1%9E%E5%9E%8B%E3%80%81%E5%A6%82%E4%BD%95%E5%9B%A0%E6%87%89%E6%83%A1%E5%8A%A3%E5%A4%A9%E5%80%99(12-1)%2015119bd5811a4ab293661a7599339347/Untitled.png"/></a></figure><ul id="053427db-50a8-4cbc-b79e-c153d44eac14" class="bulleted-list"><li style="list-style-type:disc">Troposphere (對流層)<ul id="e4c44c11-a994-4fb8-8bdf-7eac80bac04f" class="bulleted-list"><li style="list-style-type:circle">6 ~ 20 km (4~12 miles)</li></ul><ul id="2f3e4616-114d-4f5a-a1f0-0857551aab95" class="bulleted-list"><li style="list-style-type:circle">Weather, cloud, storm and temperature</li></ul><ul id="2c01662b-8237-4d4c-ba36-14decdca22a0" class="bulleted-list"><li style="list-style-type:circle">Decrease 2 degrees Celsius , one inch of air pressure every 1000 feet</li></ul></li></ul><ul id="abd037f0-671d-4086-9aff-ab405e03106a" class="bulleted-list"><li style="list-style-type:disc">Tropopause (對流層頂)<ul id="56d998db-4ca4-45de-b172-62cc50800ece" class="bulleted-list"><li style="list-style-type:circle">The location of jet stream and possible clean air turbulence (晴空亂流)</li></ul></li></ul><ul id="b5a75f61-fca2-4cbd-a363-28536da36291" class="bulleted-list"><li style="list-style-type:disc">Stratosphere (平流層)</li></ul><ul id="42d9f8a2-a28f-443b-998f-3d99e0e689a7" class="bulleted-list"><li style="list-style-type:disc">Mesosphere (中氣層)</li></ul><ul id="2626b5f4-5fec-4f51-aa24-d5dc8486c3a1" class="bulleted-list"><li style="list-style-type:disc">Thermosphere (增溫層)</li></ul><figure id="24842dfe-c86f-4430-8729-312fd009126d" class="image"><a href="%E5%9F%BA%E7%A4%8E%E5%A4%A9%E5%80%99%E7%90%86%E8%AB%96%E3%80%81%E5%A4%A9%E5%80%99%E9%A1%9E%E5%9E%8B%E3%80%81%E5%A6%82%E4%BD%95%E5%9B%A0%E6%87%89%E6%83%A1%E5%8A%A3%E5%A4%A9%E5%80%99(12-1)%2015119bd5811a4ab293661a7599339347/Untitled%201.png"><img style="width:624px" src="%E5%9F%BA%E7%A4%8E%E5%A4%A9%E5%80%99%E7%90%86%E8%AB%96%E3%80%81%E5%A4%A9%E5%80%99%E9%A1%9E%E5%9E%8B%E3%80%81%E5%A6%82%E4%BD%95%E5%9B%A0%E6%87%89%E6%83%A1%E5%8A%A3%E5%A4%A9%E5%80%99(12-1)%2015119bd5811a4ab293661a7599339347/Untitled%201.png"/></a></figure><h3 id="84b36e3d-343f-4f41-b777-adafe6455981" class="">Atmospheric Circulation</h3><ul id="5d50a679-8d25-462d-b6a1-05829aac061f" class="bulleted-list"><li style="list-style-type:disc">The major factor is uneven heating of the Earth’s surface</li></ul><figure id="845526f8-d44d-4947-a639-183d2c3d6a4a" class="image"><a href="%E5%9F%BA%E7%A4%8E%E5%A4%A9%E5%80%99%E7%90%86%E8%AB%96%E3%80%81%E5%A4%A9%E5%80%99%E9%A1%9E%E5%9E%8B%E3%80%81%E5%A6%82%E4%BD%95%E5%9B%A0%E6%87%89%E6%83%A1%E5%8A%A3%E5%A4%A9%E5%80%99(12-1)%2015119bd5811a4ab293661a7599339347/Untitled%202.png"><img style="width:432px" src="%E5%9F%BA%E7%A4%8E%E5%A4%A9%E5%80%99%E7%90%86%E8%AB%96%E3%80%81%E5%A4%A9%E5%80%99%E9%A1%9E%E5%9E%8B%E3%80%81%E5%A6%82%E4%BD%95%E5%9B%A0%E6%87%89%E6%83%A1%E5%8A%A3%E5%A4%A9%E5%80%99(12-1)%2015119bd5811a4ab293661a7599339347/Untitled%202.png"/></a></figure><h3 id="2d7e8a64-194a-47f0-8301-911aae8e07e3" class="">Atmospheric Pressure</h3><figure id="f4d373a2-3dd0-40bc-abfb-7c68831174b8" class="image"><a href="%E5%9F%BA%E7%A4%8E%E5%A4%A9%E5%80%99%E7%90%86%E8%AB%96%E3%80%81%E5%A4%A9%E5%80%99%E9%A1%9E%E5%9E%8B%E3%80%81%E5%A6%82%E4%BD%95%E5%9B%A0%E6%87%89%E6%83%A1%E5%8A%A3%E5%A4%A9%E5%80%99(12-1)%2015119bd5811a4ab293661a7599339347/Untitled%203.png"><img style="width:384px" src="%E5%9F%BA%E7%A4%8E%E5%A4%A9%E5%80%99%E7%90%86%E8%AB%96%E3%80%81%E5%A4%A9%E5%80%99%E9%A1%9E%E5%9E%8B%E3%80%81%E5%A6%82%E4%BD%95%E5%9B%A0%E6%87%89%E6%83%A1%E5%8A%A3%E5%A4%A9%E5%80%99(12-1)%2015119bd5811a4ab293661a7599339347/Untitled%203.png"/></a></figure><h2 id="cf5b4216-df93-42d6-967d-91ce09cef7b7" class="">Coriolis Force (科氏力)</h2><ul id="de3e96a9-ac07-4cc8-890c-fee6b4d693be" class="bulleted-list"><li style="list-style-type:disc">Northern Hemisphere right</li></ul><ul id="5ca07bce-4c2c-4662-82ab-a3791799566d" class="bulleted-list"><li style="list-style-type:disc">Southern Hemisphere left</li></ul><figure id="2491aeca-1418-47dc-9141-38a526544427" class="image"><a href="%E5%9F%BA%E7%A4%8E%E5%A4%A9%E5%80%99%E7%90%86%E8%AB%96%E3%80%81%E5%A4%A9%E5%80%99%E9%A1%9E%E5%9E%8B%E3%80%81%E5%A6%82%E4%BD%95%E5%9B%A0%E6%87%89%E6%83%A1%E5%8A%A3%E5%A4%A9%E5%80%99(12-1)%2015119bd5811a4ab293661a7599339347/Untitled%204.png"><img style="width:576px" src="%E5%9F%BA%E7%A4%8E%E5%A4%A9%E5%80%99%E7%90%86%E8%AB%96%E3%80%81%E5%A4%A9%E5%80%99%E9%A1%9E%E5%9E%8B%E3%80%81%E5%A6%82%E4%BD%95%E5%9B%A0%E6%87%89%E6%83%A1%E5%8A%A3%E5%A4%A9%E5%80%99(12-1)%2015119bd5811a4ab293661a7599339347/Untitled%204.png"/></a></figure><h2 id="2f5e2e8c-1b52-461a-80fd-fd9c258a6e59" class="">Measurement of Atmospheric Pressure</h2><ul id="929f7d31-b022-4bc4-822a-623a61654020" class="bulleted-list"><li style="list-style-type:disc">Measured in inches of mercury (&quot;Hg) by a mercurial barometer (水銀汞柱)</li></ul><figure id="b182daab-7ca2-4061-ade3-0981fee4217c" class="image"><a href="%E5%9F%BA%E7%A4%8E%E5%A4%A9%E5%80%99%E7%90%86%E8%AB%96%E3%80%81%E5%A4%A9%E5%80%99%E9%A1%9E%E5%9E%8B%E3%80%81%E5%A6%82%E4%BD%95%E5%9B%A0%E6%87%89%E6%83%A1%E5%8A%A3%E5%A4%A9%E5%80%99(12-1)%2015119bd5811a4ab293661a7599339347/Untitled%205.png"><img style="width:1513px" src="%E5%9F%BA%E7%A4%8E%E5%A4%A9%E5%80%99%E7%90%86%E8%AB%96%E3%80%81%E5%A4%A9%E5%80%99%E9%A1%9E%E5%9E%8B%E3%80%81%E5%A6%82%E4%BD%95%E5%9B%A0%E6%87%89%E6%83%A1%E5%8A%A3%E5%A4%A9%E5%80%99(12-1)%2015119bd5811a4ab293661a7599339347/Untitled%205.png"/></a></figure><h2 id="e0ed657d-7613-43c0-983a-662b49b6b63f" class="">Altitude and Flight</h2><ul id="2caf782e-d50a-4fec-868f-7061f826fbc8" class="bulleted-list"><li style="list-style-type:disc">At higher altitude, the air pressure is lower than the ground level, and the takeoff lift is created by the flow of the air, when air pressure is lower, it means that there is not enough air surround the airfoil, thus the takeoff speed is higher and takeoff distance is longer</li></ul><figure id="d2051ab2-ab36-4fb8-8494-e651c3721aac" class="image"><a href="%E5%9F%BA%E7%A4%8E%E5%A4%A9%E5%80%99%E7%90%86%E8%AB%96%E3%80%81%E5%A4%A9%E5%80%99%E9%A1%9E%E5%9E%8B%E3%80%81%E5%A6%82%E4%BD%95%E5%9B%A0%E6%87%89%E6%83%A1%E5%8A%A3%E5%A4%A9%E5%80%99(12-1)%2015119bd5811a4ab293661a7599339347/Untitled%206.png"><img style="width:708px" src="%E5%9F%BA%E7%A4%8E%E5%A4%A9%E5%80%99%E7%90%86%E8%AB%96%E3%80%81%E5%A4%A9%E5%80%99%E9%A1%9E%E5%9E%8B%E3%80%81%E5%A6%82%E4%BD%95%E5%9B%A0%E6%87%89%E6%83%A1%E5%8A%A3%E5%A4%A9%E5%80%99(12-1)%2015119bd5811a4ab293661a7599339347/Untitled%206.png"/></a></figure><h2 id="15052ca2-bdbb-4bd3-9d81-40514699b0d9" class="">Wind and Current</h2><ul id="9d71e5e0-baa2-4626-9f03-710e2eee677e" class="bulleted-list"><li style="list-style-type:disc">Northern hemisphere<ul id="58a418a5-c337-4661-804a-079974820005" class="bulleted-list"><li style="list-style-type:circle">H → clockwise → good weather</li></ul><ul id="763a85da-8e9b-4ee8-af9a-62c89d3b0c53" class="bulleted-list"><li style="list-style-type:circle">L → counterclockwise → bad weather</li></ul></li></ul><figure id="74e05506-7e3e-4018-b089-7647aa33ced2" class="image"><a href="%E5%9F%BA%E7%A4%8E%E5%A4%A9%E5%80%99%E7%90%86%E8%AB%96%E3%80%81%E5%A4%A9%E5%80%99%E9%A1%9E%E5%9E%8B%E3%80%81%E5%A6%82%E4%BD%95%E5%9B%A0%E6%87%89%E6%83%A1%E5%8A%A3%E5%A4%A9%E5%80%99(12-1)%2015119bd5811a4ab293661a7599339347/Untitled%207.png"><img style="width:336px" src="%E5%9F%BA%E7%A4%8E%E5%A4%A9%E5%80%99%E7%90%86%E8%AB%96%E3%80%81%E5%A4%A9%E5%80%99%E9%A1%9E%E5%9E%8B%E3%80%81%E5%A6%82%E4%BD%95%E5%9B%A0%E6%87%89%E6%83%A1%E5%8A%A3%E5%A4%A9%E5%80%99(12-1)%2015119bd5811a4ab293661a7599339347/Untitled%207.png"/></a></figure><h3 id="aa7f689f-72b3-47d1-9417-fe6869dca418" class="">Convective Current (對流)</h3><ul id="87135eda-c35f-47a0-8bac-6f81294f957b" class="bulleted-list"><li style="list-style-type:disc">Updraft occur at pavement or barren areas → quickly absorb and give off large amount of solar energy</li></ul><ul id="2b3e7507-41a0-4557-a6d7-ef382a6ded97" class="bulleted-list"><li style="list-style-type:disc">Downdraft occur at water or forest → slowly absorb and give off small amount of solar energy</li></ul><figure id="c080ea94-f9bc-4dee-86dc-39a39887d780" class="image"><a href="%E5%9F%BA%E7%A4%8E%E5%A4%A9%E5%80%99%E7%90%86%E8%AB%96%E3%80%81%E5%A4%A9%E5%80%99%E9%A1%9E%E5%9E%8B%E3%80%81%E5%A6%82%E4%BD%95%E5%9B%A0%E6%87%89%E6%83%A1%E5%8A%A3%E5%A4%A9%E5%80%99(12-1)%2015119bd5811a4ab293661a7599339347/Untitled%208.png"><img style="width:708px" src="%E5%9F%BA%E7%A4%8E%E5%A4%A9%E5%80%99%E7%90%86%E8%AB%96%E3%80%81%E5%A4%A9%E5%80%99%E9%A1%9E%E5%9E%8B%E3%80%81%E5%A6%82%E4%BD%95%E5%9B%A0%E6%87%89%E6%83%A1%E5%8A%A3%E5%A4%A9%E5%80%99(12-1)%2015119bd5811a4ab293661a7599339347/Untitled%208.png"/></a></figure><ul id="78ca9208-bd88-4551-a80c-a54b2ae707c8" class="bulleted-list"><li style="list-style-type:disc">Sea breeze(morning) and land breeze(night)</li></ul><figure id="9a605773-505f-4d9d-bf38-4d0ef394ac15" class="image"><a href="%E5%9F%BA%E7%A4%8E%E5%A4%A9%E5%80%99%E7%90%86%E8%AB%96%E3%80%81%E5%A4%A9%E5%80%99%E9%A1%9E%E5%9E%8B%E3%80%81%E5%A6%82%E4%BD%95%E5%9B%A0%E6%87%89%E6%83%A1%E5%8A%A3%E5%A4%A9%E5%80%99(12-1)%2015119bd5811a4ab293661a7599339347/Untitled%209.png"><img style="width:861px" src="%E5%9F%BA%E7%A4%8E%E5%A4%A9%E5%80%99%E7%90%86%E8%AB%96%E3%80%81%E5%A4%A9%E5%80%99%E9%A1%9E%E5%9E%8B%E3%80%81%E5%A6%82%E4%BD%95%E5%9B%A0%E6%87%89%E6%83%A1%E5%8A%A3%E5%A4%A9%E5%80%99(12-1)%2015119bd5811a4ab293661a7599339347/Untitled%209.png"/></a></figure><ul id="a8ef0043-be12-4c11-bfde-cc5f90a9e642" class="bulleted-list"><li style="list-style-type:disc">Convective current affect pilot’s maneuver  </li></ul><figure id="7d9ec1a0-af2b-42ee-96f9-107cc932c362" class="image"><a href="%E5%9F%BA%E7%A4%8E%E5%A4%A9%E5%80%99%E7%90%86%E8%AB%96%E3%80%81%E5%A4%A9%E5%80%99%E9%A1%9E%E5%9E%8B%E3%80%81%E5%A6%82%E4%BD%95%E5%9B%A0%E6%87%89%E6%83%A1%E5%8A%A3%E5%A4%A9%E5%80%99(12-1)%2015119bd5811a4ab293661a7599339347/Untitled%2010.png"><img style="width:862px" src="%E5%9F%BA%E7%A4%8E%E5%A4%A9%E5%80%99%E7%90%86%E8%AB%96%E3%80%81%E5%A4%A9%E5%80%99%E9%A1%9E%E5%9E%8B%E3%80%81%E5%A6%82%E4%BD%95%E5%9B%A0%E6%87%89%E6%83%A1%E5%8A%A3%E5%A4%A9%E5%80%99(12-1)%2015119bd5811a4ab293661a7599339347/Untitled%2010.png"/></a></figure><h3 id="2aef213f-1534-4de0-9e7f-c537e373c857" class="">Effect of Obstruction on Wind</h3><ul id="e830d8e9-5ccf-409b-a863-4ab2f51f5498" class="bulleted-list"><li style="list-style-type:disc">Buildings and mountains will cause gusts</li></ul><figure id="752f9602-ca40-4220-ab8e-5d9d79ab4844" class="image"><a href="%E5%9F%BA%E7%A4%8E%E5%A4%A9%E5%80%99%E7%90%86%E8%AB%96%E3%80%81%E5%A4%A9%E5%80%99%E9%A1%9E%E5%9E%8B%E3%80%81%E5%A6%82%E4%BD%95%E5%9B%A0%E6%87%89%E6%83%A1%E5%8A%A3%E5%A4%A9%E5%80%99(12-1)%2015119bd5811a4ab293661a7599339347/Untitled%2011.png"><img style="width:480px" src="%E5%9F%BA%E7%A4%8E%E5%A4%A9%E5%80%99%E7%90%86%E8%AB%96%E3%80%81%E5%A4%A9%E5%80%99%E9%A1%9E%E5%9E%8B%E3%80%81%E5%A6%82%E4%BD%95%E5%9B%A0%E6%87%89%E6%83%A1%E5%8A%A3%E5%A4%A9%E5%80%99(12-1)%2015119bd5811a4ab293661a7599339347/Untitled%2011.png"/></a></figure><figure id="871b89dd-83db-429d-bf54-a00435d12cbe" class="image"><a href="%E5%9F%BA%E7%A4%8E%E5%A4%A9%E5%80%99%E7%90%86%E8%AB%96%E3%80%81%E5%A4%A9%E5%80%99%E9%A1%9E%E5%9E%8B%E3%80%81%E5%A6%82%E4%BD%95%E5%9B%A0%E6%87%89%E6%83%A1%E5%8A%A3%E5%A4%A9%E5%80%99(12-1)%2015119bd5811a4ab293661a7599339347/Untitled%2012.png"><img style="width:708px" src="%E5%9F%BA%E7%A4%8E%E5%A4%A9%E5%80%99%E7%90%86%E8%AB%96%E3%80%81%E5%A4%A9%E5%80%99%E9%A1%9E%E5%9E%8B%E3%80%81%E5%A6%82%E4%BD%95%E5%9B%A0%E6%87%89%E6%83%A1%E5%8A%A3%E5%A4%A9%E5%80%99(12-1)%2015119bd5811a4ab293661a7599339347/Untitled%2012.png"/></a></figure><h3 id="5c7535e9-9f0f-417d-b9e9-2a6b17bb4078" class="">Low-level Wind Shear</h3><ul id="87ea9e78-ea59-452d-b48e-eee11c4c398e" class="bulleted-list"><li style="list-style-type:disc">Microburst (下擊暴流)</li></ul><figure id="af2f42db-0352-49c3-bafb-caf04cc8adb5" class="image"><a href="%E5%9F%BA%E7%A4%8E%E5%A4%A9%E5%80%99%E7%90%86%E8%AB%96%E3%80%81%E5%A4%A9%E5%80%99%E9%A1%9E%E5%9E%8B%E3%80%81%E5%A6%82%E4%BD%95%E5%9B%A0%E6%87%89%E6%83%A1%E5%8A%A3%E5%A4%A9%E5%80%99(12-1)%2015119bd5811a4ab293661a7599339347/Untitled%2013.png"><img style="width:708px" src="%E5%9F%BA%E7%A4%8E%E5%A4%A9%E5%80%99%E7%90%86%E8%AB%96%E3%80%81%E5%A4%A9%E5%80%99%E9%A1%9E%E5%9E%8B%E3%80%81%E5%A6%82%E4%BD%95%E5%9B%A0%E6%87%89%E6%83%A1%E5%8A%A3%E5%A4%A9%E5%80%99(12-1)%2015119bd5811a4ab293661a7599339347/Untitled%2013.png"/></a></figure><h2 id="2efb1db8-8528-4ba4-bf12-3ae4c2f15df7" class="">Wind and Pressure Representation on Weather Maps</h2><h3 id="ca12edf9-eb1a-4f5e-b900-8e27442ccaec" class="">Wind Representation</h3><ul id="86bf4381-24d6-4f68-b092-4c028c3ced57" class="bulleted-list"><li style="list-style-type:disc">Arrow means where the wind comes from</li></ul><ul id="9a161c77-9db6-42c0-b279-06028b66e0ef" class="bulleted-list"><li style="list-style-type:disc">Barbs(長方形) → 10 kts</li></ul><ul id="d486fde7-896a-4599-adef-562fae795c8e" class="bulleted-list"><li style="list-style-type:disc">Half barbs → 5 kts</li></ul><ul id="d2c333c8-514f-49ac-9c64-d3714aa3efd5" class="bulleted-list"><li style="list-style-type:disc">Pennants(錦旗) → 50 kts</li></ul><figure id="4c5d58b9-bb94-4957-afeb-f5f5c8cd4f91" class="image"><a href="%E5%9F%BA%E7%A4%8E%E5%A4%A9%E5%80%99%E7%90%86%E8%AB%96%E3%80%81%E5%A4%A9%E5%80%99%E9%A1%9E%E5%9E%8B%E3%80%81%E5%A6%82%E4%BD%95%E5%9B%A0%E6%87%89%E6%83%A1%E5%8A%A3%E5%A4%A9%E5%80%99(12-1)%2015119bd5811a4ab293661a7599339347/Untitled%2014.png"><img style="width:753px" src="%E5%9F%BA%E7%A4%8E%E5%A4%A9%E5%80%99%E7%90%86%E8%AB%96%E3%80%81%E5%A4%A9%E5%80%99%E9%A1%9E%E5%9E%8B%E3%80%81%E5%A6%82%E4%BD%95%E5%9B%A0%E6%87%89%E6%83%A1%E5%8A%A3%E5%A4%A9%E5%80%99(12-1)%2015119bd5811a4ab293661a7599339347/Untitled%2014.png"/></a></figure><h3 id="8c254f3c-6088-414b-9bfa-c057a57f2741" class="">Pressure Representation</h3><ul id="c11dd7c8-953b-4e77-ab38-e0b3ce3a4efb" class="bulleted-list"><li style="list-style-type:disc">Isobar (等壓線)</li></ul><figure id="729a33a5-c2cd-46ce-9702-e24cec7267b7" class="image"><a href="%E5%9F%BA%E7%A4%8E%E5%A4%A9%E5%80%99%E7%90%86%E8%AB%96%E3%80%81%E5%A4%A9%E5%80%99%E9%A1%9E%E5%9E%8B%E3%80%81%E5%A6%82%E4%BD%95%E5%9B%A0%E6%87%89%E6%83%A1%E5%8A%A3%E5%A4%A9%E5%80%99(12-1)%2015119bd5811a4ab293661a7599339347/Untitled%2015.png"><img style="width:708px" src="%E5%9F%BA%E7%A4%8E%E5%A4%A9%E5%80%99%E7%90%86%E8%AB%96%E3%80%81%E5%A4%A9%E5%80%99%E9%A1%9E%E5%9E%8B%E3%80%81%E5%A6%82%E4%BD%95%E5%9B%A0%E6%87%89%E6%83%A1%E5%8A%A3%E5%A4%A9%E5%80%99(12-1)%2015119bd5811a4ab293661a7599339347/Untitled%2015.png"/></a></figure><h2 id="614f6ead-84f6-4893-8291-cc7614d32b57" class="">Cloud Types</h2><ul id="17ebfe63-ab54-401b-b2ba-48ae4ea1f59e" class="bulleted-list"><li style="list-style-type:disc">Low Clouds<ul id="1ff2bff7-77ee-48ff-9855-e1b429716f57" class="bulleted-list"><li style="list-style-type:circle">stratus (層雲)</li></ul><ul id="52623424-68c8-4a26-8b9f-87fa8e88dc36" class="bulleted-list"><li style="list-style-type:circle">startocumulus</li></ul><ul id="e227f206-b3e2-49aa-92a3-c6654f95a8f5" class="bulleted-list"><li style="list-style-type:circle">nimbostratus (雨層雲)</li></ul></li></ul><ul id="11975906-2a59-4904-a1bd-7e8d375ac488" class="bulleted-list"><li style="list-style-type:disc">Middle Clouds<ul id="18e35aa5-d986-4935-b511-4a38e872d95a" class="bulleted-list"><li style="list-style-type:circle">altostratus (高層雲)</li></ul><ul id="eaada26e-3ab8-45e9-a525-64f0f9fe286b" class="bulleted-list"><li style="list-style-type:circle">altocumulus (高積雲)</li></ul></li></ul><ul id="5f6799e3-a2e3-49be-abe5-36f3fbe32239" class="bulleted-list"><li style="list-style-type:disc">High Clouds<ul id="0a0f7b02-dd86-4e40-bb86-5ebbd67a0ba9" class="bulleted-list"><li style="list-style-type:circle">cirrostratus (卷層雲)</li></ul><ul id="180e1fd5-5cb2-4579-930f-41be93f245bc" class="bulleted-list"><li style="list-style-type:circle">cirrocumulus (卷積雲)</li></ul><ul id="8cfd8d4f-899a-48b7-96ab-ff1c47e3810d" class="bulleted-list"><li style="list-style-type:circle">cirrus (卷雲)</li></ul></li></ul><ul id="5fca50d7-9bb1-44ec-a062-fbfa4f27c28f" class="bulleted-list"><li style="list-style-type:disc">Cumulonimbus (積雨雲) → the most dangerous cloud → could result in thunderstorm</li></ul><ul id="783bd9f9-9e92-4078-86d6-31a6f1f70a7e" class="bulleted-list"><li style="list-style-type:disc">Towering cumulus (濃積雲)</li></ul><figure id="e520998b-3f34-4247-8aac-5d7b95fb5c7d" class="image"><a href="%E5%9F%BA%E7%A4%8E%E5%A4%A9%E5%80%99%E7%90%86%E8%AB%96%E3%80%81%E5%A4%A9%E5%80%99%E9%A1%9E%E5%9E%8B%E3%80%81%E5%A6%82%E4%BD%95%E5%9B%A0%E6%87%89%E6%83%A1%E5%8A%A3%E5%A4%A9%E5%80%99(12-1)%2015119bd5811a4ab293661a7599339347/Untitled%2016.png"><img style="width:708px" src="%E5%9F%BA%E7%A4%8E%E5%A4%A9%E5%80%99%E7%90%86%E8%AB%96%E3%80%81%E5%A4%A9%E5%80%99%E9%A1%9E%E5%9E%8B%E3%80%81%E5%A6%82%E4%BD%95%E5%9B%A0%E6%87%89%E6%83%A1%E5%8A%A3%E5%A4%A9%E5%80%99(12-1)%2015119bd5811a4ab293661a7599339347/Untitled%2016.png"/></a></figure><figure id="f2dfb94e-d4eb-4e53-b69e-ab10c7ca6606" class="image"><a href="%E5%9F%BA%E7%A4%8E%E5%A4%A9%E5%80%99%E7%90%86%E8%AB%96%E3%80%81%E5%A4%A9%E5%80%99%E9%A1%9E%E5%9E%8B%E3%80%81%E5%A6%82%E4%BD%95%E5%9B%A0%E6%87%89%E6%83%A1%E5%8A%A3%E5%A4%A9%E5%80%99(12-1)%2015119bd5811a4ab293661a7599339347/Untitled%2017.png"><img style="width:384px" src="%E5%9F%BA%E7%A4%8E%E5%A4%A9%E5%80%99%E7%90%86%E8%AB%96%E3%80%81%E5%A4%A9%E5%80%99%E9%A1%9E%E5%9E%8B%E3%80%81%E5%A6%82%E4%BD%95%E5%9B%A0%E6%87%89%E6%83%A1%E5%8A%A3%E5%A4%A9%E5%80%99(12-1)%2015119bd5811a4ab293661a7599339347/Untitled%2017.png"/></a></figure><h2 id="13607cff-bc85-48f7-9834-9d3d4411df20" class="">Ceiling</h2><h2 id="99c2b487-8b09-441c-abbf-33e8060ea052" class="">Precipitation (降水)</h2><h2 id="c7a7c6ba-9e29-4141-b264-155ac31e4a0a" class="">Air Masses (氣團)</h2><figure id="cf9f1e81-13b9-435e-95e8-6837b8ce6ccd" class="image"><a href="%E5%9F%BA%E7%A4%8E%E5%A4%A9%E5%80%99%E7%90%86%E8%AB%96%E3%80%81%E5%A4%A9%E5%80%99%E9%A1%9E%E5%9E%8B%E3%80%81%E5%A6%82%E4%BD%95%E5%9B%A0%E6%87%89%E6%83%A1%E5%8A%A3%E5%A4%A9%E5%80%99(12-1)%2015119bd5811a4ab293661a7599339347/Untitled%2018.png"><img style="width:853px" src="%E5%9F%BA%E7%A4%8E%E5%A4%A9%E5%80%99%E7%90%86%E8%AB%96%E3%80%81%E5%A4%A9%E5%80%99%E9%A1%9E%E5%9E%8B%E3%80%81%E5%A6%82%E4%BD%95%E5%9B%A0%E6%87%89%E6%83%A1%E5%8A%A3%E5%A4%A9%E5%80%99(12-1)%2015119bd5811a4ab293661a7599339347/Untitled%2018.png"/></a></figure><h3 id="b19bbf68-8229-4f0e-ac51-98e1b3582963" class="">Fronts (鋒面)</h3><ul id="f732f9f0-5e37-4517-b700-7887c8cebb71" class="bulleted-list"><li style="list-style-type:disc">Warm<ul id="b07c8f66-202a-4523-aa72-eac29f5db6e6" class="bulleted-list"><li style="list-style-type:circle">Can create thunderstorm</li></ul><ul id="bbb5624b-a4c5-48d7-9fe1-006707b39ef3" class="bulleted-list"><li style="list-style-type:circle">move slowly 10 ~ 25 miles/hour</li></ul><ul id="20ca9e0d-ea0d-4078-b89b-ee2c680dff40" class="bulleted-list"><li style="list-style-type:circle">high humidity</li></ul><ul id="55c8ad72-e88c-4571-a6ca-482f8894295d" class="bulleted-list"><li style="list-style-type:circle">light to moderate precipitation is possible</li></ul><p id="7d54bfa7-a48a-4ba3-a2e6-a11593d95615" class="">Flight towards an approaching warm front</p><figure id="e8aa0144-7af0-4a53-bfa2-650920de5536" class="image"><a href="%E5%9F%BA%E7%A4%8E%E5%A4%A9%E5%80%99%E7%90%86%E8%AB%96%E3%80%81%E5%A4%A9%E5%80%99%E9%A1%9E%E5%9E%8B%E3%80%81%E5%A6%82%E4%BD%95%E5%9B%A0%E6%87%89%E6%83%A1%E5%8A%A3%E5%A4%A9%E5%80%99(12-1)%2015119bd5811a4ab293661a7599339347/Untitled%2019.png"><img style="width:680px" src="%E5%9F%BA%E7%A4%8E%E5%A4%A9%E5%80%99%E7%90%86%E8%AB%96%E3%80%81%E5%A4%A9%E5%80%99%E9%A1%9E%E5%9E%8B%E3%80%81%E5%A6%82%E4%BD%95%E5%9B%A0%E6%87%89%E6%83%A1%E5%8A%A3%E5%A4%A9%E5%80%99(12-1)%2015119bd5811a4ab293661a7599339347/Untitled%2019.png"/></a></figure></li></ul><ul id="ad5522ff-7c89-4141-83f2-e7854566ac27" class="bulleted-list"><li style="list-style-type:disc">Cold<ul id="b1bbd18f-546b-44c2-9ff3-d99f30ebc3cf" class="bulleted-list"><li style="list-style-type:circle">moves rapidly than warm fronts 25 ~ 30 mph</li></ul><ul id="aea1c682-7d52-4bae-8af2-711032736b45" class="bulleted-list"><li style="list-style-type:circle">Weather changes after cold fronts pass a few hours</li></ul><figure id="f4861416-8946-46a7-bc2d-ae41118594ad" class="image"><a href="%E5%9F%BA%E7%A4%8E%E5%A4%A9%E5%80%99%E7%90%86%E8%AB%96%E3%80%81%E5%A4%A9%E5%80%99%E9%A1%9E%E5%9E%8B%E3%80%81%E5%A6%82%E4%BD%95%E5%9B%A0%E6%87%89%E6%83%A1%E5%8A%A3%E5%A4%A9%E5%80%99(12-1)%2015119bd5811a4ab293661a7599339347/Untitled%2020.png"><img style="width:750px" src="%E5%9F%BA%E7%A4%8E%E5%A4%A9%E5%80%99%E7%90%86%E8%AB%96%E3%80%81%E5%A4%A9%E5%80%99%E9%A1%9E%E5%9E%8B%E3%80%81%E5%A6%82%E4%BD%95%E5%9B%A0%E6%87%89%E6%83%A1%E5%8A%A3%E5%A4%A9%E5%80%99(12-1)%2015119bd5811a4ab293661a7599339347/Untitled%2020.png"/></a></figure></li></ul><ul id="405a31e5-ef69-4712-b964-9bc5b38953a1" class="bulleted-list"><li style="list-style-type:disc">Stationary (滯留鋒)</li></ul><ul id="db8ae98e-5115-4d0d-abb3-b73e2a333cef" class="bulleted-list"><li style="list-style-type:disc">Occluded (囚固鋒)<ul id="77c49a95-dd0b-45d4-821d-96eff856ada0" class="bulleted-list"><li style="list-style-type:circle">Cold front catches up slow-moving warm front</li></ul><figure id="26ebe0ae-7bfc-4674-acba-24001e3ac504" class="image"><a href="%E5%9F%BA%E7%A4%8E%E5%A4%A9%E5%80%99%E7%90%86%E8%AB%96%E3%80%81%E5%A4%A9%E5%80%99%E9%A1%9E%E5%9E%8B%E3%80%81%E5%A6%82%E4%BD%95%E5%9B%A0%E6%87%89%E6%83%A1%E5%8A%A3%E5%A4%A9%E5%80%99(12-1)%2015119bd5811a4ab293661a7599339347/Untitled%2021.png"><img style="width:680px" src="%E5%9F%BA%E7%A4%8E%E5%A4%A9%E5%80%99%E7%90%86%E8%AB%96%E3%80%81%E5%A4%A9%E5%80%99%E9%A1%9E%E5%9E%8B%E3%80%81%E5%A6%82%E4%BD%95%E5%9B%A0%E6%87%89%E6%83%A1%E5%8A%A3%E5%A4%A9%E5%80%99(12-1)%2015119bd5811a4ab293661a7599339347/Untitled%2021.png"/></a></figure></li></ul><figure id="8eec6cb0-d8bb-46c5-b733-1c59254de3a1" class="image"><a href="%E5%9F%BA%E7%A4%8E%E5%A4%A9%E5%80%99%E7%90%86%E8%AB%96%E3%80%81%E5%A4%A9%E5%80%99%E9%A1%9E%E5%9E%8B%E3%80%81%E5%A6%82%E4%BD%95%E5%9B%A0%E6%87%89%E6%83%A1%E5%8A%A3%E5%A4%A9%E5%80%99(12-1)%2015119bd5811a4ab293661a7599339347/Untitled%2022.png"><img style="width:708px" src="%E5%9F%BA%E7%A4%8E%E5%A4%A9%E5%80%99%E7%90%86%E8%AB%96%E3%80%81%E5%A4%A9%E5%80%99%E9%A1%9E%E5%9E%8B%E3%80%81%E5%A6%82%E4%BD%95%E5%9B%A0%E6%87%89%E6%83%A1%E5%8A%A3%E5%A4%A9%E5%80%99(12-1)%2015119bd5811a4ab293661a7599339347/Untitled%2022.png"/></a></figure><h3 id="1a82352c-ece8-44a8-ab2b-87bbd51196aa" class="">Thunderstorm</h3><figure id="f193afff-cb54-4f5d-8d55-f246870c839b" class="image"><a href="%E5%9F%BA%E7%A4%8E%E5%A4%A9%E5%80%99%E7%90%86%E8%AB%96%E3%80%81%E5%A4%A9%E5%80%99%E9%A1%9E%E5%9E%8B%E3%80%81%E5%A6%82%E4%BD%95%E5%9B%A0%E6%87%89%E6%83%A1%E5%8A%A3%E5%A4%A9%E5%80%99(12-1)%2015119bd5811a4ab293661a7599339347/Untitled%2023.png"><img style="width:708px" src="%E5%9F%BA%E7%A4%8E%E5%A4%A9%E5%80%99%E7%90%86%E8%AB%96%E3%80%81%E5%A4%A9%E5%80%99%E9%A1%9E%E5%9E%8B%E3%80%81%E5%A6%82%E4%BD%95%E5%9B%A0%E6%87%89%E6%83%A1%E5%8A%A3%E5%A4%A9%E5%80%99(12-1)%2015119bd5811a4ab293661a7599339347/Untitled%2023.png"/></a></figure></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
