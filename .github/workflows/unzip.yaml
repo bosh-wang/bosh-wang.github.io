@@ -1,0 +1,43 @@
+name: Unzip and Push File
+
+on:
+  push:
+    paths:
+      - '**/*.zip'
+
+jobs:
+  unzip_and_push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Find the uploaded ZIP file
+        shell: bash
+        run: |
+          FILE=$(find . -type f -name "*.zip" | head -n 1)
+          echo "ZIP_FILE=$FILE" >> $GITHUB_ENV
+
+      - name: Unzip the file
+        if: env.ZIP_FILE != ''
+        run: unzip $ZIP_FILE -d extracted_files/
+
+      - name: Configure git
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+
+      - name: Commit unzipped files
+        run: |
+          if [ -d "extracted_files" ]; then
+            mv extracted_files/* ./
+            rm -rf extracted_files
+            git add .
+            git commit -m "Unzipped and committed files from $ZIP_FILE"
+          fi
+
+      - name: Push changes
+        run: git push origin HEAD
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
