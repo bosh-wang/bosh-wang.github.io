@@ -22,9 +22,12 @@ jobs:
           FILE=$(find . -type f -name "*.zip" | head -n 1)
           echo "ZIP_FILE=$FILE" >> $GITHUB_ENV
 
-      - name: Unzip the file
+      - name: Unzip the file with encoding fix
         if: env.ZIP_FILE != ''
-        run: unzip $ZIP_FILE -d extracted_files/
+        run: |
+          unzip -O utf-8 $ZIP_FILE -d extracted_files/ || \
+          (unzip $ZIP_FILE -d extracted_files/ && \
+           find extracted_files/ -depth -execdir rename 's/[^A-Za-z0-9._-]/_/g' {} \;)
 
       - name: Configure git
         run: |
