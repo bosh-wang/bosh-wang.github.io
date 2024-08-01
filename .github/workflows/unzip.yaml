@@ -1,5 +1,8 @@
 name: Unzip and Push File
 
+permissions:
+  contents: write
+
 on:
   push:
     paths:
