@@ -1,0 +1,677 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Chapter 6 — Meteorology For Pilots</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(0, 0, 0, 0.06); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="f57137bb-fe41-466f-a230-93b0ed0b41f0" class="page sans"><header><img class="page-cover-image" src="https://images.unsplash.com/photo-1419833173245-f59e1b93f9ee?ixlib=rb-4.0.3&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">⛅</span></div><h1 class="page-title">Chapter 6 — Meteorology For Pilots</h1><p class="page-description"></p></header><div class="page-body"><nav id="3b313d6c-4263-41c2-a42e-ecc72dcfddb5" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#6e7eb791-78fb-4c79-93a6-49765d4cd85c">Atmospheric Level</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#a98bc67c-2318-43cc-b26c-8b8ab0ce219c">Composition of Atmosphere</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#088e5b54-0ede-4957-a01f-4e49ba167e72">Convection (對流)</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#7ae5ab78-ffea-4d14-8c83-a09bf22f9ad4">Three Cell Circulation Pattern</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#cb935dbf-a2cc-4758-a439-478bea194b12">Atmosphere Pressure</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#7b969da2-8fb8-4fc9-a85b-0965a0be6ac6">Coriolis Force</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#9b4f788f-5ef4-4f80-8d76-a699da72f563">Frictional Force</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#e9288179-a01f-45a9-80ae-6cb3904b082b">Sea Breeze (Day)</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#680932f2-1d94-49f8-94e5-612ad9ad80b2">Land Breeze (Night)</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#7a2a2a14-ea2a-4bd1-b93b-cb9260a7d669">Valley Breeze (Day, From Bottom to Top)</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#3141d18a-bfe6-443b-b3f8-b807ecf70a3c">Mountain Breeze (Night, From Top to Bottom)</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#3d1e307f-2190-41ce-b354-7c417a32ccf8">Katabatic Wind (下降風)</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#4d573ade-0eea-44ec-8563-61fefec05ca4">Cold Downslope Wind</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#583e5986-4c7a-47e9-8a45-6e9b7920b527">Warm Downslope Wind</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#9fc68a19-69b0-4462-92a2-71208d2e29bb">Adiabatic Heating &amp; Adiabatic Cooling</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#a045bd81-0e40-44a7-9390-2e7908672026">Lapse Rate (氣溫垂直遞減率)</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#f457b2c4-999b-4ddd-8413-f9f66a646e0c">Temperature Inversion</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#29317930-7ad2-46f4-af8a-cd18c6b33f48">Water States</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#7a2e25eb-30be-405d-8e5d-4d5a5536758c">Dewpoint (露點)</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#815d74b8-a929-47f3-b7c0-cf8e7d87220b">Calculate Cloud Base</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#1e8a0937-859c-42eb-99f7-0ae806bed979">Dew (露水) and Frost (霜)</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#c6522cd5-8e11-4678-b6f0-68d1298896f2">Clouds</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#530cfda6-db70-41a9-b9eb-87e18cb019db">Types of Clouds</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#91964da8-c4a9-4d6f-80a3-d6aa66eca64b">Cloud Names</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#c9d14f79-4647-403b-a016-5f9c3b718f38">Low Clouds (below 6500 ft)</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#1845dd29-60fb-4e55-a916-1d5c4160a936">Fog</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#dac8e3be-de35-4042-bb16-b73ca81d42f8">Middle Cloud (6500 ft-20000 ft)</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#a782d29a-f3c7-49e0-985d-d2768ca24377">High Clouds (above 20000 ft)</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#aa171ed4-d3cf-4376-8d8d-5c59ad79bcf6">Clouds with Vertical Development</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#a2c23318-d2e1-4445-931d-706890a789b1">Precipitation</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#c01de9dd-281b-4eff-a7dd-0aebfa8d1bb2">Airmasses</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#ed63c5d5-c026-4c75-869f-f6595ed7950d">Airmass Modification</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#26e947f7-1fa7-4024-bc6b-79607bac455c">Warming From Below</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#eb320b5d-f53f-48f1-9e80-fb11945a3465">Cooling From Below</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#aa74ee6b-9ad6-427a-9af0-0b95be3895de">Fronts</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#3eeddf2d-348d-4a63-a336-96ea807357b9">Frontal Discontinuity</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#2bd7d9a0-6473-4c04-9faf-5ec0bbea7f16">Thunderstorms</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#967c8633-cd49-400b-87de-ad82a0c98912">Types of Thunderstorms</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#d8b1bd2e-ffc5-4f1e-9236-d0b0ed879063">Lifecycle of Thunderstorms</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#bb4db96d-fed2-4032-bda5-184da284ba3f">Thunderstorm Hazards</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#95b304f1-d290-4d71-a9c2-e26675016b7b">Turbulence</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#df7f1003-c1c2-49d0-b360-abda5663ade4">Low-Level Turbulence</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#31d42891-0955-45c8-ab4b-a7e7700a9342">Wind Shear</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#a2b5126a-8ef7-484c-a516-8470f2d0d12a">Low-Level Wind Shear Alert System (LLWAS)</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#3ac22b32-c7f1-484f-aa06-ca4ce6ff2e12">Terminal Doppler Weather Radar (TDWR)</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#29fb0186-4127-4b2e-8fa7-4039e6f5ca6a">Icing</a></div></nav><h2 id="6e7eb791-78fb-4c79-93a6-49765d4cd85c" class="">Atmospheric Level</h2><ul id="3a26ffe7-2e86-440c-a7a0-5fbf72c54508" class="bulleted-list"><li style="list-style-type:disc">Troposphere → 36000 feet above ground</li></ul><figure id="ecf35dc2-6725-4449-82b4-9d04ccda48cb" class="image"><a href="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled.png"><img style="width:951px" src="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled.png"/></a></figure><h2 id="a98bc67c-2318-43cc-b26c-8b8ab0ce219c" class="">Composition of Atmosphere</h2><figure id="396c0bef-7b72-42e3-8989-7a11c21110aa" class="image"><a href="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%201.png"><img style="width:708px" src="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%201.png"/></a></figure><h2 id="088e5b54-0ede-4957-a01f-4e49ba167e72" class="">Convection (對流)</h2><figure id="d21b1745-5eea-40db-8590-d9a02a34d49c" class="image"><a href="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%202.png"><img style="width:708px" src="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%202.png"/></a></figure><h2 id="7ae5ab78-ffea-4d14-8c83-a09bf22f9ad4" class="">Three Cell Circulation Pattern</h2><ul id="b9e356f3-d635-4295-a0c1-81bb2596b333" class="bulleted-list"><li style="list-style-type:disc">Hadley Cell → hot air at equator rise and flow to higher latitude</li></ul><ul id="6fb4d7aa-a99d-4fae-9981-d8ed30ce58ce" class="bulleted-list"><li style="list-style-type:disc">Ferrel Cell → at 30 degree, air from Hadley Cell is cool enough to sink back to ground and flow to higher latitude</li></ul><ul id="702c9bbf-76d2-46fe-b53d-b7acc3aa6f65" class="bulleted-list"><li style="list-style-type:disc">Polar Cell → air at pole position are cold to sink to ground and flow to lower latitude</li></ul><figure id="37a3e1e7-2119-43ae-afda-ebb955f5c6ad" class="image"><a href="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%203.png"><img style="width:1368px" src="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%203.png"/></a></figure><h2 id="cb935dbf-a2cc-4758-a439-478bea194b12" class="">Atmosphere Pressure</h2><ul id="1116307c-545a-460f-a5b7-ed4365c79250" class="bulleted-list"><li style="list-style-type:disc">Isobar → 等壓線</li></ul><ul id="ed932032-812c-4889-8fd7-cba20e4c34a8" class="bulleted-list"><li style="list-style-type:disc">Pressure gradient → change in pressure over distance</li></ul><ul id="dd64869c-ca2b-4539-a890-729749bf7926" class="bulleted-list"><li style="list-style-type:disc">Ridge → high pressure</li></ul><ul id="bdc844b4-faf4-4574-9f77-d4df32ba4120" class="bulleted-list"><li style="list-style-type:disc">Trough → low pressure</li></ul><ul id="a97e3a23-e4b6-4259-9687-a10e7735cd55" class="bulleted-list"><li style="list-style-type:disc">Col → <a href="https://en.wikipedia.org/wiki/Col_(meteorology)">https://en.wikipedia.org/wiki/Col_(meteorology)</a></li></ul><figure id="69e5fc03-dab4-474d-8e76-d8726efbd145" class="image"><a href="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%204.png"><img style="width:1398px" src="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%204.png"/></a></figure><h2 id="7b969da2-8fb8-4fc9-a85b-0965a0be6ac6" class="">Coriolis Force</h2><ul id="77c19e1f-39bb-469e-a735-0958806b8545" class="bulleted-list"><li style="list-style-type:disc">Higher latitude → greater effect on coriolis force</li></ul><figure id="a735e770-eb13-4613-b500-372c800a5c07" class="image"><a href="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%205.png"><img style="width:1387px" src="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%205.png"/></a></figure><h2 id="9b4f788f-5ef4-4f80-8d76-a699da72f563" class="">Frictional Force</h2><ul id="6b63915c-0720-42f8-a804-c0de2335ff24" class="bulleted-list"><li style="list-style-type:disc">However, within about 2,000 feet of the ground, friction caused by the earth&#x27;s surface slows the moving air. This frictional force reduces the Coriolis force. Since the pressure gradient force is now greater than Coriolis force, the wind is diverted from its path along the isobars toward the lower pressure.</li></ul><figure id="01d368f1-4fbe-4999-85b0-30ab9fde64ab" class="image"><a href="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%206.png"><img style="width:686px" src="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%206.png"/></a></figure><h2 id="e9288179-a01f-45a9-80ae-6cb3904b082b" class="">Sea Breeze (Day)</h2><figure id="b122da40-9e8f-43c0-8adc-d576e0610d44" class="image"><a href="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%207.png"><img style="width:708px" src="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%207.png"/></a></figure><h2 id="680932f2-1d94-49f8-94e5-612ad9ad80b2" class="">Land Breeze (Night)</h2><figure id="48b86ce1-4e6e-4122-b71e-d98211ce813a" class="image"><a href="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%208.png"><img style="width:1584px" src="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%208.png"/></a></figure><h2 id="7a2a2a14-ea2a-4bd1-b93b-cb9260a7d669" class="">Valley Breeze (Day, From Bottom to Top)</h2><figure id="67d8ce0a-3534-42cb-b907-76b84e182a0d" class="image"><a href="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%209.png"><img style="width:708px" src="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%209.png"/></a></figure><h2 id="3141d18a-bfe6-443b-b3f8-b807ecf70a3c" class="">Mountain Breeze (Night, From Top to Bottom)</h2><figure id="1804e044-616a-4001-83f3-ab68785c166e" class="image"><a href="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2010.png"><img style="width:1140px" src="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2010.png"/></a></figure><h2 id="3d1e307f-2190-41ce-b354-7c417a32ccf8" class="">Katabatic Wind (下降風)</h2><h3 id="4d573ade-0eea-44ec-8563-61fefec05ca4" class="">Cold Downslope Wind</h3><figure id="5b4baeac-f60b-4bf7-8821-9db5c6e37b27" class="image"><a href="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2011.png"><img style="width:708px" src="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2011.png"/></a></figure><h3 id="583e5986-4c7a-47e9-8a45-6e9b7920b527" class="">Warm Downslope Wind</h3><figure id="efe62320-cf3a-4416-aca4-aed1e022fc5d" class="image"><a href="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2012.png"><img style="width:708px" src="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2012.png"/></a></figure><h2 id="9fc68a19-69b0-4462-92a2-71208d2e29bb" class="">Adiabatic Heating &amp; Adiabatic Cooling</h2><figure id="9b4dde83-ab2e-4bc2-8f31-a95efdb6880a" class="image"><a href="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2013.png"><img style="width:708px" src="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2013.png"/></a></figure><figure id="8d3bcdf3-6faf-40e2-93a3-3a4c35482d54" class="image"><a href="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2014.png"><img style="width:1286px" src="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2014.png"/></a></figure><h2 id="a045bd81-0e40-44a7-9390-2e7908672026" class="">Lapse Rate (氣溫垂直遞減率)</h2><figure id="9660bcfd-c465-4cc9-8429-9d942eb0cd03" class="image"><a href="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2015.png"><img style="width:330px" src="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2015.png"/></a></figure><h2 id="f457b2c4-999b-4ddd-8413-f9f66a646e0c" class="">Temperature Inversion</h2><ul id="1d5c9dd5-aef3-4e43-8cf3-f6b6a5817174" class="bulleted-list"><li style="list-style-type:disc">Temperature increase as altitude increase</li></ul><figure id="d97c7cdd-72be-4f25-9e02-8c825073bf16" class="image"><a href="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2016.png"><img style="width:708px" src="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2016.png"/></a></figure><h2 id="29317930-7ad2-46f4-af8a-cd18c6b33f48" class="">Water States</h2><ul id="be9f315f-282b-486a-9c97-d7c47ca846e6" class="bulleted-list"><li style="list-style-type:disc">Evaporation</li></ul><ul id="f6eacdc3-1cb1-46d3-adc5-989ba826e2f8" class="bulleted-list"><li style="list-style-type:disc">Condensation</li></ul><ul id="fd5878fb-c406-4bec-b1fb-b24057fd8175" class="bulleted-list"><li style="list-style-type:disc">Freezing</li></ul><ul id="28c672dc-9c61-48f4-a1c5-5c56e2a7ff98" class="bulleted-list"><li style="list-style-type:disc">Melting</li></ul><ul id="53c29901-7314-42b8-90c9-2a8f5ed5d14e" class="bulleted-list"><li style="list-style-type:disc">Sublimation (昇華)</li></ul><ul id="0d194382-99e3-4790-bf19-4d66f1e0b62d" class="bulleted-list"><li style="list-style-type:disc">Deposition (凝華)</li></ul><figure id="58b56ccd-745b-43fe-9710-60427934e775" class="image"><a href="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2017.png"><img style="width:708px" src="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2017.png"/></a></figure><h2 id="7a2e25eb-30be-405d-8e5d-4d5a5536758c" class="">Dewpoint (露點)</h2><ul id="3a9fbc25-4a04-4d7b-b601-563c5bf7948b" class="bulleted-list"><li style="list-style-type:disc">Saturated (飽和)</li></ul><figure id="833154cd-0202-4fb8-bfa7-2424ef1aea07" class="image"><a href="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2018.png"><img style="width:708px" src="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2018.png"/></a></figure><h2 id="815d74b8-a929-47f3-b7c0-cf8e7d87220b" class="">Calculate Cloud Base</h2><figure id="3c3acf77-898d-47ea-a47c-fe47e7e64172" class="image"><a href="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2019.png"><img style="width:1418px" src="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2019.png"/></a></figure><h2 id="1e8a0937-859c-42eb-99f7-0ae806bed979" class="">Dew (露水) and Frost (霜)</h2><ul id="3249dddf-93fe-4664-8858-901ff2cd9afb" class="bulleted-list"><li style="list-style-type:disc">Both are generated by the current temperature below the dewpoint</li></ul><figure id="332fec9b-d8a7-464a-afef-d0bd11082ff9" class="image"><a href="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2020.png"><img style="width:1312px" src="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2020.png"/></a></figure><h2 id="c6522cd5-8e11-4678-b6f0-68d1298896f2" class="">Clouds</h2><figure id="90de10d5-d480-4a5c-bdee-2f8e2b355dc0" class="image"><a href="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2021.png"><img style="width:576px" src="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2021.png"/></a></figure><figure id="3417e8d2-0952-45b2-878b-5780ffba2026" class="image"><a href="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2022.png"><img style="width:708px" src="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2022.png"/></a></figure><h2 id="530cfda6-db70-41a9-b9eb-87e18cb019db" class="">Types of Clouds</h2><h3 id="91964da8-c4a9-4d6f-80a3-d6aa66eca64b" class="">Cloud Names</h3><figure id="cea9d54a-81b2-41a1-9804-bcb36e961d3c" class="image"><a href="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2023.png"><img style="width:670px" src="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2023.png"/></a></figure><h3 id="c9d14f79-4647-403b-a016-5f9c3b718f38" class="">Low Clouds (below 6500 ft)</h3><figure id="af3e8ddf-dcfd-4293-8bac-6a41b3d0ba58" class="image"><a href="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2024.png"><img style="width:1187px" src="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2024.png"/></a></figure><h3 id="1845dd29-60fb-4e55-a916-1d5c4160a936" class="">Fog</h3><figure id="3a76f165-7221-4a3a-8229-122ce319ca68" class="image"><a href="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2025.png"><img style="width:542px" src="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2025.png"/></a></figure><h3 id="dac8e3be-de35-4042-bb16-b73ca81d42f8" class="">Middle Cloud (6500 ft-20000 ft)</h3><figure id="093cb7f3-baf9-4a3c-9271-b012c71efb76" class="image"><a href="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2026.png"><img style="width:1035px" src="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2026.png"/></a></figure><h3 id="a782d29a-f3c7-49e0-985d-d2768ca24377" class="">High Clouds (above 20000 ft)</h3><figure id="a46eb6bf-783b-42b7-b2fb-e4062b44e6f9" class="image"><a href="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2027.png"><img style="width:1163px" src="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2027.png"/></a></figure><h3 id="aa171ed4-d3cf-4376-8d8d-5c59ad79bcf6" class="">Clouds with Vertical Development</h3><figure id="c43e80d9-1da0-41b2-9283-316d8aac0a9c" class="image"><a href="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2028.png"><img style="width:708px" src="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2028.png"/></a></figure><h2 id="a2c23318-d2e1-4445-931d-706890a789b1" class="">Precipitation</h2><h2 id="c01de9dd-281b-4eff-a7dd-0aebfa8d1bb2" class="">Airmasses</h2><figure id="346f725d-b950-4f68-9c0c-434a2aa1f3e7" class="image"><a href="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2029.png"><img style="width:707.9896240234375px" src="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2029.png"/></a></figure><h2 id="ed63c5d5-c026-4c75-869f-f6595ed7950d" class="">Airmass Modification</h2><h3 id="26e947f7-1fa7-4024-bc6b-79607bac455c" class="">Warming From Below</h3><p id="7e13d8d3-a6bf-428c-8a68-3a01217b5574" class="">→ Causing extreme instability</p><figure id="3e04f6d0-f4a2-4915-8665-1f3748626ba3" class="image"><a href="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2030.png"><img style="width:707.9791870117188px" src="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2030.png"/></a></figure><h3 id="eb320b5d-f53f-48f1-9e80-fb11945a3465" class="">Cooling From Below</h3><p id="dea95471-edb4-472a-ba24-897dbf78354c" class="">→ increase stability</p><figure id="0e88c8fa-f856-459c-8b42-bdd692b96606" class="image"><a href="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2031.png"><img style="width:1159px" src="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2031.png"/></a></figure><h2 id="aa74ee6b-9ad6-427a-9af0-0b95be3895de" class="">Fronts</h2><ul id="dcd0e17e-3ffd-473a-b79c-c27a3c36a08e" class="bulleted-list"><li style="list-style-type:disc">Boundary between airmasses is called front</li></ul><ul id="8ad29d71-ed82-43f6-b9f8-b27cda47cc5a" class="bulleted-list"><li style="list-style-type:disc">Cold front</li></ul><ul id="8fa1fbf7-8f6f-4380-b9bd-968371741ffb" class="bulleted-list"><li style="list-style-type:disc">Warm front</li></ul><ul id="44e0cff5-a480-4676-b3db-4f9ee4bde411" class="bulleted-list"><li style="list-style-type:disc">Stationary front</li></ul><ul id="d79c6594-3c0f-4348-978e-b38177853887" class="bulleted-list"><li style="list-style-type:disc">Occluded front</li></ul><p id="c88c6931-e7f0-4deb-a0f9-4712620ea4aa" class=""> </p><h2 id="3eeddf2d-348d-4a63-a336-96ea807357b9" class="">Frontal Discontinuity</h2><figure id="cc09b642-d90b-4acb-9bf8-a8ae639a462f" class="image"><a href="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2032.png"><img style="width:618px" src="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2032.png"/></a></figure><figure id="2e8c7ad8-0526-4aa9-8b92-3cd952c5dcd8" class="image"><a href="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2033.png"><img style="width:579px" src="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2033.png"/></a></figure><figure id="ee9dc780-3ff2-454f-b4f4-baada9aa6b98" class="image"><a href="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2034.png"><img style="width:573px" src="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2034.png"/></a></figure><figure id="8069eed3-627a-46a5-9090-b868adeddfc2" class="image"><a href="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2035.png"><img style="width:531px" src="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2035.png"/></a></figure><h2 id="2bd7d9a0-6473-4c04-9faf-5ec0bbea7f16" class="">Thunderstorms</h2><h3 id="967c8633-cd49-400b-87de-ad82a0c98912" class="">Types of Thunderstorms</h3><ul id="bc9a22c3-5749-48fa-94f7-fd1ae32cf15c" class="bulleted-list"><li style="list-style-type:disc">Airmass thunderstorm → summer afternoon, short-lived</li></ul><ul id="599ad4eb-5c54-499e-8f78-9fdc141cccce" class="bulleted-list"><li style="list-style-type:disc">Server thunderstorm → violent thunderstorm</li></ul><h3 id="d8b1bd2e-ffc5-4f1e-9236-d0b0ed879063" class="">Lifecycle of Thunderstorms</h3><figure id="fdb26f2b-6353-4bdf-9ff6-a958051b6a95" class="image"><a href="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2036.png"><img style="width:1484px" src="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2036.png"/></a></figure><ul id="8fd7e34c-84a8-49df-ac6e-a4e5bd47bb73" class="bulleted-list"><li style="list-style-type:disc">Cumulus stage (developing stage)</li></ul><figure id="3c869ffb-0817-4a15-806d-86aae6433f42" class="image"><a href="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2037.png"><img style="width:707.9896240234375px" src="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2037.png"/></a></figure><ul id="f3bfac4f-b999-4a81-ac35-db334a5912c1" class="bulleted-list"><li style="list-style-type:disc">Mature stage</li></ul><figure id="ba070dcb-c048-4256-9924-c42a3059b1ff" class="image"><a href="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2038.png"><img style="width:707.9896240234375px" src="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2038.png"/></a></figure><ul id="92bdd771-0886-4644-9c5c-93f59c992950" class="bulleted-list"><li style="list-style-type:disc">Dissipating stage</li></ul><figure id="6184d315-b3ef-40e1-92c7-95c72c06079b" class="image"><a href="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2039.png"><img style="width:707.9791870117188px" src="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2039.png"/></a></figure><figure id="1f471c43-a85b-4dc0-994f-c4b02863f330" class="image"><a href="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2040.png"><img style="width:873px" src="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2040.png"/></a></figure><h2 id="bb4db96d-fed2-4032-bda5-184da284ba3f" class="">Thunderstorm Hazards</h2><ul id="14eb7b09-12a6-407c-95b3-10df578579f4" class="bulleted-list"><li style="list-style-type:disc">Turbulence</li></ul><ul id="f063f624-f6ca-4414-a50a-94c436c2c250" class="bulleted-list"><li style="list-style-type:disc">Lightning</li></ul><ul id="9a99843c-a0c1-4174-b97f-23047d95a09b" class="bulleted-list"><li style="list-style-type:disc">Hail (冰雹)</li></ul><ul id="46f2b55f-d466-41f5-a284-332bce1f1139" class="bulleted-list"><li style="list-style-type:disc">Tornadoes (Waterspout, when tornadoes touch the water)</li></ul><h2 id="95b304f1-d290-4d71-a9c2-e26675016b7b" class="">Turbulence</h2><h3 id="df7f1003-c1c2-49d0-b360-abda5663ade4" class="">Low-Level Turbulence</h3><ul id="8c854704-013d-4af1-abfb-217445931ebb" class="bulleted-list"><li style="list-style-type:disc">Mechanical turbulence → cause by buildings or mountains</li></ul><figure id="fb6699d8-f3af-46c7-bb07-47862b229a4e" class="image"><a href="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2041.png"><img style="width:707.9896240234375px" src="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2041.png"/></a></figure><figure id="644e490a-77ce-40b7-847a-40c29f2d6586" class="image"><a href="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2042.png"><img style="width:1309px" src="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2042.png"/></a></figure><ul id="5f289a5a-feca-4c42-87c3-d8ed0bb0b67c" class="bulleted-list"><li style="list-style-type:disc">Convective turbulence (Thermal turbulence)</li></ul><figure id="3db01cb9-e24e-4d8d-9a2c-87c722b170b2" class="image"><a href="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2043.png"><img style="width:773px" src="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2043.png"/></a></figure><ul id="fc02fecf-39d2-4e15-9229-85fd3835c568" class="bulleted-list"><li style="list-style-type:disc">Frontal turbulence → cold front</li></ul><figure id="b2520746-727c-45ec-a047-6a66034c6cac" class="image"><a href="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2044.png"><img style="width:707.9583740234375px" src="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2044.png"/></a></figure><ul id="befe1b2a-62c1-42be-877a-ed4d1e3cd3ad" class="bulleted-list"><li style="list-style-type:disc">Wake turbulence → cause by large aircraft wingtip vortices when aircraft is producing lift</li></ul><figure id="c82678c5-193e-4305-bbab-41a5db86909c" class="image"><a href="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2045.png"><img style="width:792px" src="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2045.png"/></a></figure><figure id="28dface0-0b02-40d8-83ee-88b2d96810e1" class="image"><a href="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2046.png"><img style="width:707.9896240234375px" src="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2046.png"/></a></figure><ul id="a3047697-47fe-45d9-a898-868fcc5fbcd4" class="bulleted-list"><li style="list-style-type:disc">Clear air turbulence (CAT) → high altitude phenomenon, no visual warning</li></ul><figure id="8a47d6ee-d8ef-44af-9a3c-1cb4c3850135" class="image"><a href="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2047.png"><img style="width:913px" src="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2047.png"/></a></figure><figure id="d8c345fd-d3d0-4ee2-a996-776c4979085a" class="image"><a href="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2048.png"><img style="width:707.9896240234375px" src="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2048.png"/></a></figure><ul id="d92d04e3-b7b7-43b7-8293-78676e8288ab" class="bulleted-list"><li style="list-style-type:disc">Mountain wave turbulence</li></ul><figure id="d3429f52-6816-4148-a909-843a1691c4e1" class="image"><a href="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2049.png"><img style="width:1137px" src="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2049.png"/></a></figure><figure id="d99b93b3-73ff-47df-8cf2-733ad9744fdf" class="image"><a href="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2050.png"><img style="width:744px" src="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2050.png"/></a></figure><h2 id="31d42891-0955-45c8-ab4b-a7e7700a9342" class="">Wind Shear</h2><figure id="42716139-1dca-4dc6-ab63-2a4a833c9fbc" class="image"><a href="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2051.png"><img style="width:707.9791870117188px" src="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2051.png"/></a></figure><figure id="1cbcb29a-f543-4cd6-a7e0-d9b1e962e8df" class="image"><a href="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2052.png"><img style="width:709px" src="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2052.png"/></a></figure><h2 id="a2b5126a-8ef7-484c-a516-8470f2d0d12a" class="">Low-Level Wind Shear Alert System (LLWAS)</h2><figure id="3fbba209-4e82-45a0-86a0-de1a7be7bf4c" class="image"><a href="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2053.png"><img style="width:707.9583740234375px" src="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2053.png"/></a></figure><figure id="73dacd6b-8a8c-4e28-9136-3d164e86eb5a" class="image"><a href="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2054.png"><img style="width:707.9375px" src="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2054.png"/></a></figure><h2 id="3ac22b32-c7f1-484f-aa06-ca4ce6ff2e12" class="">Terminal Doppler Weather Radar (TDWR)</h2><ul id="518058bd-4b63-457d-b6f6-15c14c191860" class="bulleted-list"><li style="list-style-type:disc">To detect wind shear </li></ul><figure id="51400aad-f831-42e6-9470-dff6dd09af18" class="image"><a href="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2055.png"><img style="width:1158px" src="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2055.png"/></a></figure><h2 id="29fb0186-4127-4b2e-8fa7-4039e6f5ca6a" class="">Icing</h2><figure id="e7f9fca0-f297-4484-abee-0c7f280eed36" class="image"><a href="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2056.png"><img style="width:767px" src="Chapter%206%20%E2%80%94%20Meteorology%20For%20Pilots%20f57137bbfe41466fa23093b0ed0b41f0/Untitled%2056.png"/></a></figure></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

@@ -1,0 +1,679 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>飛行四力、基本飛行儀器、目視飛行通話程序(3-2, 5-1)</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(0, 0, 0, 0.06); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="d88a61c3-3c3a-4196-91bf-1bbaf3333746" class="page sans"><header><h1 class="page-title">飛行四力、基本飛行儀器、目視飛行通話程序(3-2, 5-1)</h1><p class="page-description"></p></header><div class="page-body"><p id="a9a0c706-cce9-4b4c-87a7-dbb7bd520308" class="">
+</p><nav id="40cf762b-49a2-4b88-8a9c-d6077d70ef54" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#47dfeda5-b709-432d-80fc-a33b19cd3ebd">3-2</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#9fbb8e93-279d-4183-ab10-de3730273dcb">Four forces</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#6e36a10e-35c0-4ae0-bcf4-7cad16582a88">Pitch, Roll and Yaw</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#67772d1e-2e81-4ee1-beac-01be7902d7c0">Center of Gravity (CG)</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#faff1b70-8682-4f53-b64c-6cb861642668">Major Component of A Plane</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#211dcd16-af9a-452b-9888-17f91477ac02">Subcomponents of a Plane</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#9f5417aa-76b0-4fde-be15-4eb0ce49a18e">5-1</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#4bfb7667-4b95-427f-949e-e507605eef58">1. Thrust</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#481784e6-1e86-4222-b7d5-4fe4d8be8912">2. Lift</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#8e41eb93-8936-48e2-ac98-25ac019d7837">3. Drag</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#eb7bc1cb-e2ce-4f35-a2d2-865e6640f003">4. Weight</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#50d5239f-034a-4fcf-b3b7-bca60eb8b9e8">Wingtip Vortices</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#1ba94b69-5e1b-4e69-83ba-4256d83dce3c">Ground Effect</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#cbbda499-73c8-4c06-8601-bcee31ab3077">Axes of an Aircraft</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#4baac37f-2811-4aaf-81d3-7595a8dc7d8d">Moment and Moment Arm (力矩與力臂)</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#812f5d4f-2c23-4591-a428-c6ffc1a99167">Aircraft Design Characteristics</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#a128d30a-75cd-4fd9-8516-0c3b04b8fb1e">Effect of Wing Planform</a></div></nav><h2 id="47dfeda5-b709-432d-80fc-a33b19cd3ebd" class="">3-2</h2><h3 id="9fbb8e93-279d-4183-ab10-de3730273dcb" class="">Four forces</h3><ol type="1" id="477d7231-0312-414a-8b17-43a19a5c8ee4" class="numbered-list" start="1"><li>lift</li></ol><ol type="1" id="a9ac607a-fca6-45e0-a39b-bf5c939848f8" class="numbered-list" start="2"><li>weight</li></ol><ol type="1" id="a350431e-344e-4a6e-8b69-e64d9b2e0cbb" class="numbered-list" start="3"><li>drag</li></ol><ol type="1" id="5a0eaa68-f0a0-4820-87dc-5313321312c6" class="numbered-list" start="4"><li>thrust</li></ol><figure id="b8adbb48-6c09-48d1-b3a4-a6c86bec0416" class="image"><a href="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled.png"><img style="width:384px" src="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled.png"/></a></figure><h3 id="6e36a10e-35c0-4ae0-bcf4-7cad16582a88" class="">Pitch, Roll and Yaw</h3><ol type="1" id="612608f4-94a4-4e2f-a760-8d30cdbcc9ea" class="numbered-list" start="1"><li>Pitch → rotate on lateral(橫) axis (y)</li></ol><ol type="1" id="4828d50d-e610-4798-a919-989ba398bf3c" class="numbered-list" start="2"><li>Roll → rotate on longitudinal(縱) axis (x)</li></ol><ol type="1" id="c18af4c9-1080-4450-bfbc-33909b421a45" class="numbered-list" start="3"><li>Yaw → rotate on vertical axis (z)</li></ol><figure id="252bf275-df17-40a2-9f9a-2907fbf16aa4" class="image"><a href="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%201.png"><img style="width:1454px" src="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%201.png"/></a></figure><h3 id="67772d1e-2e81-4ee1-beac-01be7902d7c0" class="">Center of Gravity (CG)</h3><ul id="d5954a1d-f22b-4307-a7dd-9595903929c8" class="bulleted-list"><li style="list-style-type:disc">CG should be set when fuel tank is empty</li></ul><ul id="323bda21-7dae-4865-98ca-05f6a26691ff" class="bulleted-list"><li style="list-style-type:disc">If CG moves rearward, the aircraft becomes more and more dynamically unstable</li></ul><figure id="1a1f08ee-13ec-4490-a6e3-b3c739cce698" class="image"><a href="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%202.png"><img style="width:443px" src="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%202.png"/></a></figure><h3 id="faff1b70-8682-4f53-b64c-6cb861642668" class="">Major Component of A Plane</h3><ol type="1" id="9ab1821d-ed21-4208-a9c0-69480488d145" class="numbered-list" start="1"><li>Fuselage → 機身<ul id="5e80b455-6a68-4473-b172-bbad5743dd87" class="bulleted-list"><li style="list-style-type:disc">longerons → 縱樑</li></ul><ul id="4ad06be4-4ace-4a5a-90a2-6d3126f9a843" class="bulleted-list"><li style="list-style-type:disc">struts → 支撐</li></ul><ul id="499e2e7d-72e3-446c-9592-399742ab5a5d" class="bulleted-list"><li style="list-style-type:disc">bulkhead → 艙壁</li></ul><ul id="0944cf93-dec9-4081-b213-171e6593a0cb" class="bulleted-list"><li style="list-style-type:disc">stringers → 縱樑</li></ul><ul id="224cc2db-b702-48d2-9842-e00eeffe717e" class="bulleted-list"><li style="list-style-type:disc">truss → 桁架</li></ul></li></ol><figure id="c9f426f5-814f-4f70-900a-e0c1db4d3c54" class="image"><a href="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%203.png"><img style="width:384px" src="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%203.png"/></a></figure><ol type="1" id="1576294f-28a9-48bd-8265-8f3604b14a0d" class="numbered-list" start="2"><li>Wing</li></ol><ul id="648a80d7-ea40-4af9-b365-ecd7e095e1c3" class="bulleted-list"><li style="list-style-type:disc">Ailerons(副翼) extend from about the midpoint of each wing<br/>outward toward the tip, and move in opposite directions to<br/>create aerodynamic forces that cause the airplane to roll.<br/></li></ul><ul id="a0d5fdc5-4889-4fa9-ad29-5a0aed16c3d0" class="bulleted-list"><li style="list-style-type:disc">Flaps(襟翼) extend outward from the fuselage to near the midpoint<br/>of each wing. The flaps are normally flush with the wing’s<br/>surface during cruising flight. When extended, the flaps move<br/>simultaneously downward to increase the lifting force of the<br/>wing for takeoffs and landings<br/></li></ul><figure id="965875ec-abd5-4258-891f-835c9b3ba555" class="image"><a href="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%204.png"><img style="width:288px" src="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%204.png"/></a></figure><ul id="b5898750-dc34-4de8-9b5e-52a7fb93f329" class="bulleted-list"><li style="list-style-type:disc">Wing components<ul id="21bbdf41-c7f2-4952-af47-0235b84f1159" class="bulleted-list"><li style="list-style-type:circle">spar → 雙樑翼</li></ul></li></ul><figure id="eddf57a7-592c-415b-a5ea-7b9fa5cc7175" class="image"><a href="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%205.png"><img style="width:1469px" src="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%205.png"/></a></figure><ol type="1" id="fe4c392f-e755-41b6-8205-c1fea3cae828" class="numbered-list" start="3"><li>Empennage (尾翼)<ul id="433510fc-9ad8-467f-82e0-1caf052c59d4" class="bulleted-list"><li style="list-style-type:disc">Rudder → control left and right of the nose (yaw)</li></ul><ul id="51fe5e35-36da-4fae-b77d-bbe2bc438e7e" class="bulleted-list"><li style="list-style-type:disc">Elevator → control up and down of the nose (pitch)</li></ul><ul id="6ef76d54-1abe-4977-a39a-18e10a47cf24" class="bulleted-list"><li style="list-style-type:disc"><a href="https://medium.com/@james201293/%E8%88%AA%E7%A9%BA%E7%AD%86%E8%A8%98-%E5%A6%82%E4%BD%95%E8%AE%93%E9%A3%9B%E8%A1%8C%E6%9B%B4%E8%BC%95%E9%AC%86-%E9%A3%9B%E6%A9%9F%E7%9A%844%E7%A8%AEtrim-tab-70fe56a43407">Trim tabs</a> → opposite direction of elevator → stabilize the aircraft </li></ul><figure id="b94c6a46-38e2-4eb5-a153-fc4c3ab7e3f7" class="image"><a href="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%206.png"><img style="width:432px" src="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%206.png"/></a></figure><ul id="cef7f6dd-673d-4594-8eb7-efb34c5a19fb" class="bulleted-list"><li style="list-style-type:disc">another type of empennage<p id="81477167-5d21-4bda-992e-cbfb03565485" class="">A second type of empennage design does not require an<br/>elevator. Instead, it incorporates a one-piece horizontal<br/>stabilizer that pivots from a central hinge point. This type of<br/>design is called a stabilator and is moved using the control<br/>wheel, just as the elevator is moved. For example, when a<br/>pilot pulls back on the control wheel, the stabilator pivots so<br/>the trailing edge moves up. This increases the aerodynamic<br/>tail load and causes the nose of the airplane to move up.<br/>Stabilators have an antiservo tab extending across their<br/>trailing edge. [Figure 3-11]<br/>The antiservo tab moves in the same direction as the trailing<br/>edge of the stabilator and helps make the stabilator less<br/>sensitive. The antiservo tab also functions as a trim tab to<br/>relieve control pressures and helps maintain the stabilator in<br/>the desired position.<br/></p><figure id="ea2c24a3-ad81-41af-ba8f-8d1f56b760b2" class="image"><a href="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%207.png"><img style="width:384px" src="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%207.png"/></a></figure></li></ul></li></ol><ol type="1" id="27282b21-ff3c-4c05-9ae5-d7757da8d02a" class="numbered-list" start="4"><li>Landing Gear<ul id="91671696-8148-480d-9839-ade47fe63acb" class="bulleted-list"><li style="list-style-type:disc">rear wheel → tailwheel, conventional landing gear</li></ul><ul id="db48647e-b2a0-4249-9ddf-246277e35aff" class="bulleted-list"><li style="list-style-type:disc">front wheel → nosewheel</li></ul></li></ol><ol type="1" id="1f9da4e7-3c5c-4172-b561-f0ed275719f2" class="numbered-list" start="5"><li>Powerplant<ul id="a86290f8-49a3-4bcf-bcfc-f2322350c354" class="bulleted-list"><li style="list-style-type:disc">Cowling (整流罩), nacelle (引擎吊艙<strong>)</strong></li></ul><ul id="ea26bdfa-1f38-4e82-ad60-1eee7de0aae7" class="bulleted-list"><li style="list-style-type:disc">The purpose of the cowling or nacelle is to streamline the flow of air around the engine and to help cool the engine by ducting air around the cylinders.</li></ul></li></ol><figure id="db917f99-8b41-42a2-9d85-5322cbfa079c" class="image"><a href="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%208.png"><img style="width:336px" src="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%208.png"/></a></figure><ul id="2fa62fe0-c49b-4a93-971a-b4cb6a3985a6" class="bulleted-list"><li style="list-style-type:disc">Angle of Attack (AOA): <a href="https://zh.wikipedia.org/zh-tw/攻角">https://zh.wikipedia.org/zh-tw/攻角</a></li></ul><h3 id="211dcd16-af9a-452b-9888-17f91477ac02" class="">Subcomponents of a Plane</h3><ol type="1" id="5979027c-376b-4f05-9f66-e73c52fcae7a" class="numbered-list" start="1"><li>Airframe<ul id="293ff2d2-fd45-4f04-a726-6f1450f7875a" class="bulleted-list"><li style="list-style-type:disc">The airframe is the basic structure of an aircraft and is designed to withstand all aerodynamic forces, as well as the stresses imposed by the weight of the fuel, crew, and payload.</li></ul></li></ol><ol type="1" id="bb9222d6-c5c1-4ca2-ba0c-cbb7a6aff8a7" class="numbered-list" start="2"><li>Electrical Systems<ul id="31081428-85ae-4c23-bb05-cd7262826a88" class="bulleted-list"><li style="list-style-type:disc">Engine driven alternating current generator</li></ul><ul id="24c2b303-fe54-4ab9-8d6e-48f76df51816" class="bulleted-list"><li style="list-style-type:disc">Auxiliary power unit (APUs)</li></ul><ul id="b5301ebf-b671-48de-870d-3d8b4ff46fa7" class="bulleted-list"><li style="list-style-type:disc">External power</li></ul></li></ol><ol type="1" id="1cb060ec-91e4-4003-86a4-3e75dda8421c" class="numbered-list" start="3"><li>Flight Control</li></ol><ol type="1" id="3708837e-7248-4792-a2eb-376fcdb2a9f6" class="numbered-list" start="4"><li>Brakes<ul id="bf62ab66-f5f9-4643-983e-0607dc287bdc" class="bulleted-list"><li style="list-style-type:disc">Life of brakes is measured in landings rather than miles</li></ul></li></ol><p id="d07b8d9f-8c10-4947-b0ce-16276a146af6" class="">
+</p><h2 id="9f5417aa-76b0-4fde-be15-4eb0ce49a18e" class="">5-1</h2><h3 id="4bfb7667-4b95-427f-949e-e507605eef58" class="">1. Thrust</h3><ul id="642abcc8-9fc7-4c2d-a1b9-3fcb27f95c23" class="bulleted-list"><li style="list-style-type:disc">The thrust equals to drag when aircraft flying at constant speed. </li></ul><ul id="1daa0a22-6930-47d8-ac0f-204d48d500e4" class="bulleted-list"><li style="list-style-type:disc">The lift equals to weight when aircraft maintains the constant altitude</li></ul><ul id="e8f8b123-3d2a-40bd-a139-9409d9ac99ee" class="bulleted-list"><li style="list-style-type:disc">Angle of Attack at different speed</li></ul><figure id="c15dfac9-f7fe-4bd8-b110-5c101694dcd1" class="image"><a href="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%209.png"><img style="width:680px" src="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%209.png"/></a></figure><h3 id="481784e6-1e86-4222-b7d5-4fe4d8be8912" class="">2. Lift</h3><ul id="e165dcef-3539-4bfe-bfb3-8cd0dc33d593" class="bulleted-list"><li style="list-style-type:disc">Lift Equation → proportional to coefficient of lift for a given airfoil, air density, velocity and surface of airfoil<ul id="246bccff-c6fc-4bed-9aeb-070c7238e209" class="bulleted-list"><li style="list-style-type:circle">Air density → higher, warmer, moister air has lower air density</li></ul><figure id="0a4f75a2-0894-4657-964e-2b1474bf52df" class="image"><a href="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%2010.png"><img style="width:432px" src="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%2010.png"/></a></figure></li></ul><ul id="100334b6-ac76-497c-8dea-641529ac7b1b" class="bulleted-list"><li style="list-style-type:disc">Drag Equation<figure id="00838481-2ad1-40c5-943a-080e542db43b" class="image"><a href="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%2011.png"><img style="width:432px" src="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%2011.png"/></a></figure></li></ul><ul id="2a6b5023-5d76-4441-bdd5-d9703c39d237" class="bulleted-list"><li style="list-style-type:disc">Coefficient of list and drag at various AOA<ul id="42f733da-ee7f-456d-89c4-999fac3392d4" class="bulleted-list"><li style="list-style-type:circle">Coefficient of drag increases exponentially when AOA increases</li></ul><ul id="64954fbf-201f-4abc-bb68-bb6a90c52441" class="bulleted-list"><li style="list-style-type:circle">Coefficient of lift increases linearly when AOA increases</li></ul><ul id="ab68140d-25af-429d-a886-6b2e48ad1f81" class="bulleted-list"><li style="list-style-type:circle">When coefficient of lift starts to decrease → stall begins (critical AOA)</li></ul><ul id="8b8b1168-08a2-41c1-b57e-b4ef0349909d" class="bulleted-list"><li style="list-style-type:circle">20 degree is the critical AOA</li></ul><ul id="e67602d7-02ed-4ed4-8052-82ec32aedbcf" class="bulleted-list"><li style="list-style-type:circle">The lift/drag ratio (green) reaches its maximum at 6° AOA, meaning that at this angle, the most lift is obtained for the least amount of drag. → Means that at 6°, it is the most efficient, since the angle produces the maximum lift with the minimum drag.</li></ul></li></ul><figure id="2a183219-38c7-4080-8823-c2669698dace" class="image"><a href="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%2012.png"><img style="width:1486px" src="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%2012.png"/></a></figure><h3 id="8e41eb93-8936-48e2-ac98-25ac019d7837" class="">3. Drag</h3><ul id="18c914a1-d6a2-4d0a-887d-9f1fdecca664" class="bulleted-list"><li style="list-style-type:disc">Parasite Drag (寄生阻力)<ul id="acca61aa-1974-4989-9e0e-c149c31a971a" class="bulleted-list"><li style="list-style-type:circle">form drag (形狀阻力) → generated by aircraft due to its shape and airflow around it </li></ul><figure id="817aa869-de07-4361-942e-ff59f23a119a" class="image"><a href="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%2013.png"><img style="width:384px" src="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%2013.png"/></a></figure><ul id="a7faa043-919b-4202-a18f-d2e1c888f8ef" class="bulleted-list"><li style="list-style-type:circle">interference drag</li></ul><figure id="a82161b9-c41d-445b-8a87-f2d4fdebf0fb" class="image"><a href="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%2014.png"><img style="width:528px" src="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%2014.png"/></a></figure><figure id="a486a9c1-216e-4c48-ad41-14239841a557" class="image"><a href="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%2015.png"><img style="width:336px" src="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%2015.png"/></a></figure><ul id="8b82441e-4d28-457f-bc9b-f6d2e0a879aa" class="bulleted-list"><li style="list-style-type:circle">skin friction drag → due to the contact of moving air and the surface of the aircraft</li></ul></li></ul><ul id="04d6de38-57fb-4d9f-9813-ce4028a69151" class="bulleted-list"><li style="list-style-type:disc">Induced drag <ul id="9b26984d-1823-492b-88d9-e877b6f9a666" class="bulleted-list"><li style="list-style-type:circle">How does induced drag generate?<ul id="302195ca-5877-400d-a6f1-3c73db02d53e" class="bulleted-list"><li style="list-style-type:square">When airplane fly forward, the air pressure on top of airfoil is lower than below  → it will make air below flow upwards </li></ul><figure id="14fc82d5-bbf6-4b86-9c19-1e64bab2d0cc" class="image"><a href="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%2016.png"><img style="width:288px" src="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%2016.png"/></a></figure><ul id="353a6252-09e9-4140-a911-bc253b3c2646" class="bulleted-list"><li style="list-style-type:square">Creating vortices like this </li></ul><figure id="b3fcabbd-ef63-448f-bf1f-386cbb750fb3" class="image"><a href="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%2017.png"><img style="width:288px" src="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%2017.png"/></a></figure></li></ul><ul id="680aad15-67c0-4496-bfe2-5c87faf5b80f" class="bulleted-list"><li style="list-style-type:circle">Thus, the “downwash” airstream will create an induced drag<figure id="a1be42a0-ecf0-42a0-9a71-17b8b05fbf2a" class="image"><a href="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%2018.png"><img style="width:384px" src="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%2018.png"/></a></figure></li></ul><ul id="71f679cd-d2f2-454b-8ee3-132876a67e6d" class="bulleted-list"><li style="list-style-type:circle">AOA and induced drag<ul id="c198af3b-8f44-40b9-8a82-175df33c08b8" class="bulleted-list"><li style="list-style-type:square">In any case, as AOA increases, induced drag increases proportionally.</li></ul><ul id="81f23b12-7261-4063-8330-dd42ccd8afe3" class="bulleted-list"><li style="list-style-type:square">The lower the airspeed, the greater the AOA required to produce lift, and thus the more induced drag.</li></ul></li></ul><ul id="55f55361-4f5e-4f35-8e2f-7f8b43713cf1" class="bulleted-list"><li style="list-style-type:circle">Relation between airspeed and drag<ul id="aed70e11-8092-4b62-a302-450f662db12e" class="bulleted-list"><li style="list-style-type:square">When airspeed increases → parasite drag increases, induced drag decreases</li></ul><ul id="6fcf2cfd-add5-4231-b4d0-42b0c126e527" class="bulleted-list"><li style="list-style-type:square">When airspeed decreases → parasite drag decreases, induced drag increases</li></ul><figure id="21bf5961-2bac-42d6-a4ce-7a70beb9bc94" class="image"><a href="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%2019.png"><img style="width:336px" src="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%2019.png"/></a></figure></li></ul><ul id="0b0e1993-7a46-48eb-85fb-532fc96ca113" class="bulleted-list"><li style="list-style-type:circle">Ground effect<ul id="3e04821b-8e5f-436f-aea9-8765eb659098" class="bulleted-list"><li style="list-style-type:square">When altitude is low, the induced drag will decrease compared to high altitude.</li></ul><ul id="6b375392-f1e6-4a1d-9f86-6eac0a139fcf" class="bulleted-list"><li style="list-style-type:square">Thus, less speed the create the same lift when near the ground.</li></ul></li></ul></li></ul><h3 id="eb7bc1cb-e2ce-4f35-a2d2-865e6640f003" class="">4. Weight</h3><ul id="222ce20c-0848-4a7a-b122-42fb284fcd77" class="bulleted-list"><li style="list-style-type:disc">Center of pressure(CP) and center of gravity(CG)<ul id="d819c3ae-b63c-426a-a274-e2a8064ce0ed" class="bulleted-list"><li style="list-style-type:circle">When CP is forward of CG, it will create a pitch nose down</li></ul><ul id="c6f9b423-4e9b-42f4-a0b9-65f2b9277cf6" class="bulleted-list"><li style="list-style-type:circle">When CP is rearward of CG, it will create a pitch nose up.</li></ul></li></ul><figure id="f1f19856-607f-43e9-b675-3d0a096a3033" class="image"><a href="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%2020.png"><img style="width:311px" src="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%2020.png"/></a></figure><h3 id="50d5239f-034a-4fcf-b3b7-bca60eb8b9e8" class="">Wingtip Vortices</h3><figure id="5730aa7b-d5b3-4482-8d66-86da18b5b7a3" class="image"><a href="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%2021.png"><img style="width:576px" src="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%2021.png"/></a></figure><ul id="be1b878b-6351-455e-a2de-9099607a0f90" class="bulleted-list"><li style="list-style-type:disc">Whenever airfoil is producing lift, the induced drag occurs and wingtip vortices are created.<ul id="b07c51ef-335b-4675-8650-87ecee489281" class="bulleted-list"><li style="list-style-type:circle">The heavier and slower the aircraft, the greater the AOA and the stronger the wingtip vortices.</li></ul><ul id="5e718918-50b3-40e2-991b-4ee07569b66c" class="bulleted-list"><li style="list-style-type:circle">Thus, an aircraft will create wingtip vortices with maximum strength occurring during the takeoff, climb, and landing phases of flight.</li></ul><ul id="34605ab7-97e9-4662-a581-afecdee67d16" class="bulleted-list"><li style="list-style-type:circle">Creating a hazard called “wake turbulence”</li></ul></li></ul><ul id="9d06155f-bdbd-4ce7-a503-d9527aff5311" class="bulleted-list"><li style="list-style-type:disc">Avoiding wake turbulence<figure id="3fad4b3e-d998-4a73-8357-7ad04490eade" class="image"><a href="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%2022.png"><img style="width:384px" src="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%2022.png"/></a></figure></li></ul><h3 id="1ba94b69-5e1b-4e69-83ba-4256d83dce3c" class="">Ground Effect</h3><ul id="5890d410-cce2-402a-8bed-b22306181786" class="bulleted-list"><li style="list-style-type:disc">Ground effect will generate extra lift force compared to high altitude <ul id="bdf57797-ac5a-423c-bcb4-73398438a4e0" class="bulleted-list"><li style="list-style-type:circle">Thus, we need lower speed than high altitude to produce the same lift force.</li></ul></li></ul><figure id="693263b1-b9a4-46eb-ba89-a64095daa012" class="image"><a href="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%2023.png"><img style="width:528px" src="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%2023.png"/></a></figure><ul id="b1eeadf6-9406-4887-939b-4488efb2d0f3" class="bulleted-list"><li style="list-style-type:disc">Because ground effect impact a lot during takeoff and landing process<ul id="72870585-a171-4690-99d9-c1881a9322e1" class="bulleted-list"><li style="list-style-type:circle">aircraft leaving ground effect will cause<figure id="1e76b5cc-c273-4511-a0e8-477080adfd8c" class="image"><a href="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%2024.png"><img style="width:336px" src="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%2024.png"/></a></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="f43a9a67-33f6-43f3-bfb7-678790af3ca4"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><em><strong>Never retract the landing gear or flaps prior to establishing a positive rate of climb and only after achieving a safe altitude.</strong></em></div></figure></li></ul><ul id="fb34b745-3f3a-4389-b750-2c2a78d72b64" class="bulleted-list"><li style="list-style-type:circle">When aircraft is landing, we should decelerate to prevent ground effect create extra more lift, or “floating”</li></ul></li></ul><h3 id="cbbda499-73c8-4c06-8601-bcee31ab3077" class="">Axes of an Aircraft</h3><ul id="adc8e40b-f102-4e4f-97d9-24f22ad7de36" class="bulleted-list"><li style="list-style-type:disc">from nose to tail → longitudinal axis → pitch → elevator</li></ul><ul id="3269ec77-e75f-4a2f-a4d0-38149bcdb8e7" class="bulleted-list"><li style="list-style-type:disc">wingtip to wingtip → lateral axis → roll → aileron</li></ul><ul id="392b5617-7434-4097-961b-621db2caa653" class="bulleted-list"><li style="list-style-type:disc">upward → vertical axis → yaw → rudder</li></ul><figure id="be2c1554-39f9-480f-ba6a-99375af505f2" class="image"><a href="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%2025.png"><img style="width:1506px" src="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%2025.png"/></a></figure><h3 id="4baac37f-2811-4aaf-81d3-7595a8dc7d8d" class="">Moment and Moment Arm (力矩與力臂)</h3><h3 id="812f5d4f-2c23-4591-a428-c6ffc1a99167" class="">Aircraft Design Characteristics</h3><ul id="70cba98e-750f-459d-b999-3fdae1aedb4c" class="bulleted-list"><li style="list-style-type:disc">Static Stability<figure id="1166ba28-59ac-4932-8e45-0386b7df040b" class="image"><a href="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%2026.png"><img style="width:680px" src="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%2026.png"/></a></figure></li></ul><ul id="1068b629-39c5-455b-9403-91306094ea40" class="bulleted-list"><li style="list-style-type:disc">Dynamic Stability<ul id="a09deec1-2845-45ca-9f90-4174a817c481" class="bulleted-list"><li style="list-style-type:circle">damped → 阻尼</li></ul><ul id="f9de9145-9632-49c6-84d9-1cd83004aa59" class="bulleted-list"><li style="list-style-type:circle">oscillation → 震盪</li></ul></li></ul><figure id="359db61f-518a-4389-aca8-366612197d3a" class="image"><a href="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%2027.png"><img style="width:1533px" src="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%2027.png"/></a></figure><ul id="3cda1605-2f67-43b2-8c0c-1100a27be718" class="bulleted-list"><li style="list-style-type:disc">Longitude stability → most aircraft design to make the CL rear to CG, making aircraft “nose heavy”.  → to create a positive AOA with potential more lift force.</li></ul><figure id="6a561c5d-a0df-4026-8859-117f6abc2961" class="image"><a href="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%2028.png"><img style="width:384px" src="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%2028.png"/></a></figure><ul id="b8cfcdb8-0d3e-4c45-a8c6-85cfd466c7f1" class="bulleted-list"><li style="list-style-type:disc">Lateral Stability<ul id="4e72a891-e89b-4b79-a8f6-08f719c2fe8d" class="bulleted-list"><li style="list-style-type:circle">Dihedral → outer tips of the wing are slightly higher than wing roots</li></ul><figure id="d36acfba-85c6-4cb3-a503-823ce62046ec" class="image"><a href="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%2029.png"><img style="width:1519px" src="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%2029.png"/></a></figure><figure id="15d753ce-9d07-443a-af0c-574325ba9bb9" class="image"><a href="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%2030.png"><img style="width:336px" src="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%2030.png"/></a></figure><ul id="4001ed18-a9cc-4a76-9674-d6fa38766fcc" class="bulleted-list"><li style="list-style-type:circle">Sweepback and Wing Location → the angle of wings with respect to fuselage</li></ul><figure id="508c1251-9f2d-40ab-9b70-1753fea3a490" class="image"><a href="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%2031.png"><img style="width:432px" src="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%2031.png"/></a></figure><ul id="6edd050c-5198-4fd4-ba44-2bd9c1c601c0" class="bulleted-list"><li style="list-style-type:circle">Keel Effect and Weight Distribution → high-wing aircraft has more lateral stability</li></ul><figure id="52426945-27c7-4155-a95e-02390da3a30a" class="image"><a href="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%2032.png"><img style="width:754px" src="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%2032.png"/></a></figure></li></ul><ul id="303c874b-4357-4e8a-8b2f-d57505f051a9" class="bulleted-list"><li style="list-style-type:disc">Directional Stability → the farther and larger the fin is placed, the greater the aircraft’s directional stability</li></ul><figure id="29a5db67-871f-4a70-86f3-4e57bc03ae5c" class="image"><a href="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%2033.png"><img style="width:384px" src="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%2033.png"/></a></figure><h3 id="a128d30a-75cd-4fd9-8516-0c3b04b8fb1e" class="">Effect of Wing Planform</h3><figure id="339a7a6d-2403-4f24-817a-730e9460ccf8" class="image"><a href="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%2034.png"><img style="width:708px" src="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%2034.png"/></a></figure><figure id="569a1e9f-42bc-4299-9559-2e7e71abed0d" class="image"><a href="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%2035.png"><img style="width:708px" src="%E9%A3%9B%E8%A1%8C%E5%9B%9B%E5%8A%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E9%A3%9B%E8%A1%8C%E5%84%80%E5%99%A8%E3%80%81%E7%9B%AE%E8%A6%96%E9%A3%9B%E8%A1%8C%E9%80%9A%E8%A9%B1%E7%A8%8B%E5%BA%8F(3-2,%205-1)%20d88a61c33c3a419691bf1bbaf3333746/Untitled%2035.png"/></a></figure></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
