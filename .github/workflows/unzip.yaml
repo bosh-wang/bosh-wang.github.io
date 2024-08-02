@@ -27,7 +27,14 @@ jobs:
         run: |
           unzip -O utf-8 $ZIP_FILE -d extracted_files/ || \
           (unzip $ZIP_FILE -d extracted_files/ && \
-           find extracted_files/ -depth -execdir rename 's/[^A-Za-z0-9._-]/_/g' {} \;)
+           find extracted_files/ -depth -execdir rename 's/[^A-Za-z0-9._-]/_/g' {} \;) || rm $ZIP_FILE
+
+      - name: Rename HTML file to index.html
+        run: |
+          HTML_FILE=$(find extracted_files/ -type f -name "*.html" | head -n 1)
+          if [ -n "$HTML_FILE" ]; then
+            mv "$HTML_FILE" extracted_files/index.html
+          fi
 
       - name: Configure git
         run: |
