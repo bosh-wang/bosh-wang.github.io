@@ -27,7 +27,13 @@ jobs:
         run: |
           unzip -O utf-8 $ZIP_FILE -d extracted_files/ || \
           (unzip $ZIP_FILE -d extracted_files/ && \
-           find extracted_files/ -depth -execdir rename 's/[^A-Za-z0-9._-]/_/g' {} \;) || rm $ZIP_FILE
+           find extracted_files/ -depth -execdir rename 's/[^A-Za-z0-9._-]/_/g' {} \;) 
+           
+      - name: Delete the original ZIP file
+        run: |
+          if [ -n "$ZIP_FILE" ]; then
+            rm "$ZIP_FILE"
+          fi
 
       - name: Rename HTML file to index.html
         run: |
