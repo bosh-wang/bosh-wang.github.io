@@ -35,18 +35,23 @@ jobs:
             rm "$ZIP_FILE"
           fi
 
+      - name: Move unzipped files to root and clean up
+        run: |
+          mv extracted_files/* ./
+          rm -rf extracted_files
+
+      - name: Rename HTML file to index.html
+        run: |
+          HTML_FILE=$(find -type f -name "*.html" | head -n 1)
+          if [ -n "$HTML_FILE" ]; then
+            mv "$HTML_FILE" index.html
+          fi
+
       - name: Add favicon links to index.html
         run: |
           for file in $(find . -type f -name "*.html"); do
             sed -i 's|</head>|<link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">\n<link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">\n<link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">\n<link rel="manifest" href="./favicon/site.webmanifest">\n<link rel="mask-icon" href="./favicon/safari-pinned-tab.svg" color="#5bbad5">\n<meta name="msapplication-TileColor" content="#da532c">\n<meta name="theme-color" content="#ffffff">\n</head>|' "$file"
           done
-
-      - name: Rename HTML file to index.html
-        run: |
-          HTML_FILE=$(find extracted_files/ -type f -name "*.html" | head -n 1)
-          if [ -n "$HTML_FILE" ]; then
-            mv "$HTML_FILE" extracted_files/index.html
-          fi
 
       - name: Configure git
         run: |
@@ -55,12 +60,9 @@ jobs:
 
       - name: Commit unzipped files
         run: |
-          if [ -d "extracted_files" ]; then
-            mv extracted_files/* ./
-            rm -rf extracted_files
-            git add .
-            git commit -m "Unzipped and committed files from $ZIP_FILE"
-          fi
+          git add .
+          git commit -m "Unzipped and committed files from $ZIP_FILE"
+          
 
       - name: Push changes
         run: git push origin HEAD
