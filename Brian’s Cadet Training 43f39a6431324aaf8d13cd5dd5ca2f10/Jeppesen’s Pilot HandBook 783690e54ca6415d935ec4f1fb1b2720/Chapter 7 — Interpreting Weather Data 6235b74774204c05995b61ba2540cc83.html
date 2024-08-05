@@ -1,0 +1,678 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Chapter 7 — Interpreting Weather Data</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(0, 0, 0, 0.06); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="6235b747-7420-4c05-995b-61ba2540cc83" class="page sans"><header><img class="page-cover-image" src="https://www.notion.so/images/page-cover/woodcuts_2.jpg" style="object-position:center 19.999999999999996%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">🌪️</span></div><h1 class="page-title">Chapter 7 — Interpreting Weather Data</h1><p class="page-description"></p></header><div class="page-body"><p id="6de592b7-0a0e-4d39-9f01-b15850ffec2d" class="">
+</p><nav id="877b41ca-8320-4364-b621-b8273f694626" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#85651888-853e-45f1-836a-9c7121e65c9d">Forecasting Methods</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#5b08476f-4fc2-4e82-97a7-9432b8713cfe">Persistent Forecast</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#b5ab2e86-9679-408d-9576-e6dae7903adf">Trend Forecast</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#7d33a676-8157-4f09-976e-36dcf05eb246">Climatological Forecast</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#66cb7ec4-5ed0-4635-87ea-8d39fee7012e">Analogue Forecast</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#a8962a7f-3880-460b-ba5c-b110294a3f4b">Meteorological Forecast</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#c44a9c95-105d-4d1e-88f5-a2d38ddcda21">Numerical Weather Prediction</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#4494f5e8-f60c-41e0-bbb1-37bc9138431d">Compiling and Processing Weather Data</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#103564a7-19b1-4557-87ff-cb0bdcaee2bc">Aviation Routine Weather Report (METAR)</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#f806849e-3b90-4a2c-a8b8-0e55c8c395d6">Radar Weather Reports</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#cc73e541-bd6b-4184-a9ad-fb467f9b3509">Pilot Weather Reports (PIREPs)</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#0bd9c89a-fc01-4bfa-87ee-6c7cccb79aaf">Terminal Aerodrome Forecast (TAF)</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#d5cefb5c-0119-49a5-b33d-2cba1d6ef1df">Type of Forecast</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#db90cff7-ad98-4ba6-a8f6-c1f21c3feebd">Station Identifier and Issuance Date/Time</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#3fbe2706-4b41-40e4-b878-470ace268390">Valid Period</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#a2755d69-f32b-41e9-b2de-a1e8da825bee">Forecast</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#5a00c4f0-25dc-4feb-b8e1-95332eda98b3">Graphic Reports</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#213d6a28-3d24-4beb-b74f-cf24055ef1e9">Weather Depiction Chart</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#66fd362c-f9a4-4835-a163-568c3ad36a73">Radar Summary Chart</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#6ca20d20-fc6a-487e-bc5b-3068c71c5754">Satellite Weather Pictures</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#61370f9f-93a7-4e67-a374-b07da2b1d840">Graphic Forecasts</a></div></nav><h2 id="85651888-853e-45f1-836a-9c7121e65c9d" class="">Forecasting Methods</h2><h3 id="5b08476f-4fc2-4e82-97a7-9432b8713cfe" class="">Persistent Forecast</h3><ul id="2c6bfb79-a420-49f0-9bba-9c8f49ed32a1" class="bulleted-list"><li style="list-style-type:disc">With visual clue</li></ul><h3 id="b5ab2e86-9679-408d-9576-e6dae7903adf" class="">Trend Forecast</h3><h3 id="7d33a676-8157-4f09-976e-36dcf05eb246" class="">Climatological Forecast</h3><ul id="f79728f0-8de2-4fce-8d0f-eba858ee1344" class="bulleted-list"><li style="list-style-type:disc">Historical record</li></ul><h3 id="66cb7ec4-5ed0-4635-87ea-8d39fee7012e" class="">Analogue Forecast</h3><h3 id="a8962a7f-3880-460b-ba5c-b110294a3f4b" class="">Meteorological Forecast</h3><h3 id="c44a9c95-105d-4d1e-88f5-a2d38ddcda21" class="">Numerical Weather Prediction</h3><h2 id="4494f5e8-f60c-41e0-bbb1-37bc9138431d" class="">Compiling and Processing Weather Data</h2><figure id="8dc3a07b-98f0-4bbf-9bec-3eb71d45caa8" class="image"><a href="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled.png"><img style="width:597px" src="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled.png"/></a></figure><figure id="ec38f4bc-32b0-4556-b6af-34e94cf16336" class="image"><a href="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%201.png"><img style="width:605px" src="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%201.png"/></a></figure><h2 id="103564a7-19b1-4557-87ff-cb0bdcaee2bc" class="">Aviation Routine Weather Report (METAR)</h2><figure id="7792b5b2-55f9-4f1a-b1c6-ff501dc8a2bb" class="image"><a href="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%202.png"><img style="width:707.9896240234375px" src="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%202.png"/></a></figure><ul id="e2342df2-f160-4a99-941c-15f3fc453f5f" class="bulleted-list"><li style="list-style-type:disc">Type of Report <ul id="cc37701c-12e5-445e-9144-4519209a8db5" class="bulleted-list"><li style="list-style-type:circle">METAR → update every hour</li></ul><ul id="92c7918a-b019-45e1-afe8-3be346a9ead2" class="bulleted-list"><li style="list-style-type:circle">SPECI (non-routine special aviation weather report) → unscheduled</li></ul></li></ul><figure id="bd3a8c6f-69e3-4bba-a7f4-3f5d32674820" class="image"><a href="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%203.png"><img style="width:1156px" src="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%203.png"/></a></figure><ul id="92860255-1244-4531-8983-83a2be12308e" class="bulleted-list"><li style="list-style-type:disc">Station Identifier → Identify country and airport. ex: RCTP</li></ul><figure id="899853ce-d41d-44e8-8ab7-22e6e3bacc64" class="image"><a href="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%204.png"><img style="width:1180px" src="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%204.png"/></a></figure><ul id="2fd05620-4ef7-47fa-8cf2-0be8745478b0" class="bulleted-list"><li style="list-style-type:disc">Time of Report</li></ul><figure id="a0eb60f3-f1ad-4968-8794-8d7c0a02d450" class="image"><a href="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%205.png"><img style="width:1188px" src="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%205.png"/></a></figure><ul id="a92734e1-cd74-4fd3-910f-bad632bbf496" class="bulleted-list"><li style="list-style-type:disc">Modifier</li></ul><figure id="df867691-56bb-493b-9117-1db65b684634" class="image"><a href="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%206.png"><img style="width:1189px" src="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%206.png"/></a></figure><ul id="e59009fb-92ef-4842-86e8-6909d99990ab" class="bulleted-list"><li style="list-style-type:disc">Wind Information</li></ul><figure id="d0a8d368-d631-4fac-b862-5fa01875f414" class="image"><a href="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%207.png"><img style="width:707.9791870117188px" src="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%207.png"/></a></figure><figure id="51f6ce75-4ee6-4763-ac62-f6bbbe4af0fd" class="image"><a href="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%208.png"><img style="width:1393px" src="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%208.png"/></a></figure><ul id="159af03f-05e8-4f04-b198-fa8a1ba0c7e6" class="bulleted-list"><li style="list-style-type:disc">Visibility</li></ul><figure id="c529b857-5f16-44b9-b31b-4c3376ab1b96" class="image"><a href="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%209.png"><img style="width:707.96875px" src="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%209.png"/></a></figure><figure id="c01c819c-8a55-4363-85c5-b968a7931177" class="image"><a href="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%2010.png"><img style="width:1044px" src="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%2010.png"/></a></figure><ul id="009df884-1d14-43df-b86b-17f3e4a56f7a" class="bulleted-list"><li style="list-style-type:disc">Weather</li></ul><figure id="0bc5bdde-47e1-44e2-bd18-fe1f584903e6" class="image"><a href="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%2011.png"><img style="width:707.9896240234375px" src="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%2011.png"/></a></figure><figure id="6a9bc37f-05be-4492-9729-8f7cbf869b31" class="image"><a href="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%2012.png"><img style="width:1055px" src="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%2012.png"/></a></figure><figure id="596b8f1e-4e66-4b55-a77f-b1ec799550d4" class="image"><a href="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%2013.png"><img style="width:707.9896240234375px" src="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%2013.png"/></a></figure><figure id="674c272b-e649-4cd3-b6eb-9833e088144c" class="image"><a href="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%2014.png"><img style="width:572px" src="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%2014.png"/></a></figure><ul id="fd1c1867-0d26-42f7-a574-b8040b8d2cec" class="bulleted-list"><li style="list-style-type:disc">Temperature and Dewpoint</li></ul><figure id="4245ebbe-bc99-491c-9d72-176b56eb1e3e" class="image"><a href="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%2015.png"><img style="width:1206px" src="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%2015.png"/></a></figure><ul id="edccb867-a5c5-4d50-9373-f8c8a0d450d3" class="bulleted-list"><li style="list-style-type:disc">Altimeter</li></ul><figure id="86a62036-53a4-4d58-8507-32a33a692a86" class="image"><a href="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%2016.png"><img style="width:1208px" src="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%2016.png"/></a></figure><ul id="eab23301-71eb-4082-90ce-35c39388767f" class="bulleted-list"><li style="list-style-type:disc">Remarks</li></ul><figure id="c0101572-5cd8-4546-bb71-173df0dcfc06" class="image"><a href="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%2017.png"><img style="width:909px" src="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%2017.png"/></a></figure><h2 id="f806849e-3b90-4a2c-a8b8-0e55c8c395d6" class="">Radar Weather Reports</h2><figure id="975d5d8c-ffc6-4210-a04f-8b7f172ae84d" class="image"><a href="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%2018.png"><img style="width:1474px" src="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%2018.png"/></a></figure><h2 id="cc73e541-bd6b-4184-a9ad-fb467f9b3509" class="">Pilot Weather Reports (PIREPs)</h2><ul id="17941c80-6b64-4e21-b930-17086a257eae" class="bulleted-list"><li style="list-style-type:disc">Used to inform other pilots</li></ul><figure id="b8fec9ad-69b3-4000-8991-18c6093172d3" class="image"><a href="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%2019.png"><img style="width:872px" src="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%2019.png"/></a></figure><h2 id="0bd9c89a-fc01-4bfa-87ee-6c7cccb79aaf" class="">Terminal Aerodrome Forecast (TAF)</h2><figure id="455bc187-cab5-4e34-abcc-12a3d1231dd0" class="image"><a href="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%2020.png"><img style="width:883px" src="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%2020.png"/></a></figure><h3 id="d5cefb5c-0119-49a5-b33d-2cba1d6ef1df" class="">Type of Forecast</h3><figure id="ed3b3bd3-65a3-46fe-a23d-4cb06fe53e98" class="image"><a href="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%2021.png"><img style="width:1228px" src="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%2021.png"/></a></figure><h3 id="db90cff7-ad98-4ba6-a8f6-c1f21c3feebd" class="">Station Identifier and Issuance Date/Time</h3><figure id="8e47f53a-b92f-443f-bd3e-d7a530a6231d" class="image"><a href="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%2022.png"><img style="width:707.96875px" src="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%2022.png"/></a></figure><figure id="3a41ffb4-94df-4c68-ba2e-faaa92d3a341" class="image"><a href="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%2023.png"><img style="width:707.9583740234375px" src="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%2023.png"/></a></figure><h3 id="3fbe2706-4b41-40e4-b878-470ace268390" class="">Valid Period</h3><figure id="fbc1842c-06b8-4160-8821-fb42a3f297df" class="image"><a href="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%2024.png"><img style="width:707.96875px" src="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%2024.png"/></a></figure><h3 id="a2755d69-f32b-41e9-b2de-a1e8da825bee" class="">Forecast</h3><figure id="2c64ccd5-4807-453f-913e-c38152cc0ff1" class="image"><a href="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%2025.png"><img style="width:707.9896240234375px" src="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%2025.png"/></a></figure><figure id="209486f7-a4af-4146-87ef-b85a436afb99" class="image"><a href="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%2026.png"><img style="width:704px" src="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%2026.png"/></a></figure><h2 id="5a00c4f0-25dc-4feb-b8e1-95332eda98b3" class="">Graphic Reports</h2><figure id="eae0e504-a3a1-4800-a2b7-2aacff2e93c4" class="image"><a href="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%2027.png"><img style="width:707.9896240234375px" src="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%2027.png"/></a></figure><figure id="c1f00cb5-6ad7-4726-b149-3f4bda5893ed" class="image"><a href="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%2028.png"><img style="width:795px" src="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%2028.png"/></a></figure><h2 id="213d6a28-3d24-4beb-b74f-cf24055ef1e9" class="">Weather Depiction Chart</h2><figure id="7450245f-1bba-4ac4-bd69-231feeabaa81" class="image"><a href="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%2029.png"><img style="width:1207px" src="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%2029.png"/></a></figure><figure id="7d40bb65-1dd6-4c7a-9742-61124180486f" class="image"><a href="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%2030.png"><img style="width:707.9896240234375px" src="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%2030.png"/></a></figure><h2 id="66fd362c-f9a4-4835-a163-568c3ad36a73" class="">Radar Summary Chart</h2><figure id="70204597-c556-48bf-a345-a264cc598256" class="image"><a href="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%2031.png"><img style="width:707.9896240234375px" src="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%2031.png"/></a></figure><figure id="d1f98fe0-d026-470c-9356-a8589b930c6f" class="image"><a href="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%2032.png"><img style="width:563px" src="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%2032.png"/></a></figure><figure id="e61c7981-6a29-48cf-a809-bf605227b60a" class="image"><a href="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%2033.png"><img style="width:539px" src="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%2033.png"/></a></figure><h2 id="6ca20d20-fc6a-487e-bc5b-3068c71c5754" class="">Satellite Weather Pictures</h2><figure id="6d90f155-912d-46a1-97cc-c4ac337cb446" class="image"><a href="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%2034.png"><img style="width:1132px" src="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%2034.png"/></a></figure><h2 id="61370f9f-93a7-4e67-a374-b07da2b1d840" class="">Graphic Forecasts</h2><figure id="a325c3a1-8520-46cf-ac28-d83ef6ac58a4" class="image"><a href="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%2035.png"><img style="width:527px" src="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%2035.png"/></a></figure><figure id="a82b5a66-ada2-4f84-a4c3-59982f2c6eb1" class="image"><a href="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%2036.png"><img style="width:514px" src="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%2036.png"/></a></figure><figure id="81c81263-ee47-4bf1-adfb-4af69792e3da" class="image"><a href="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%2037.png"><img style="width:503px" src="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%2037.png"/></a></figure><figure id="d7f24dba-8b25-46aa-83fd-019def07e2be" class="image"><a href="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%2038.png"><img style="width:566px" src="Chapter%207%20%E2%80%94%20Interpreting%20Weather%20Data%206235b74774204c05995b61ba2540cc83/Untitled%2038.png"/></a></figure></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
